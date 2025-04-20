@@ -36,7 +36,7 @@ struct ExpenseView: View {
                 }
             }
             
-            Text("\(viewModel.totalExpense.formattedWithSpaces) \(viewModel.currency.rawValue)")
+            Text("\(viewModel.expense.formattedWithSpaces) \(viewModel.currency.rawValue)")
                 .kerning(0.4)
                 .font(.system(size: 34, weight: .bold))
                 

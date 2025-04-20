@@ -30,7 +30,7 @@ final class ExpenseStorageServiceImpl: ExpenseStorageService {
         do {
             let res = try provider.dataStack.fetchAll(
                 From<Expense>()
-                    .where(\.date > startDate)
+                    .where(\.date >= startDate && \.date <= endDate)
             )
             return res
         } catch {

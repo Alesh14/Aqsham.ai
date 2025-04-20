@@ -11,6 +11,17 @@ enum Period: String {
     case lastDay = "Last Day"
     case lastWeek = "Last Week"
     case lastMonth = "Last Month"
+    
+    var startDate: Date {
+        switch self {
+        case .lastDay:
+            return Calendar.current.startOfDay(for: Date())
+        case .lastWeek:
+            return Calendar.current.date(byAdding: .day, value: -7, to: Calendar.current.startOfDay(for: Date()))!
+        case .lastMonth:
+            return Calendar.current.date(byAdding: .month, value: -1, to: Calendar.current.startOfDay(for: Date()))!
+        }
+    }
 }
 
 final class Preferences: ObservableObject {
@@ -28,7 +39,7 @@ final class Preferences: ObservableObject {
         }
     }
     
-    @Published var selectedPeriod: Period = .lastMonth {
+    @Published var selectedPeriod: Period = .lastDay {
         didSet {
             UserDefaults.standard.set(selectedPeriod.rawValue, forKey: Keys.selectedPeriod)
         }

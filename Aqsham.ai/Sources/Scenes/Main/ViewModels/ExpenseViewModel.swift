@@ -6,8 +6,7 @@ final class ExpenseViewModel: ObservableObject {
     @Injected(Container.expenseStorageService) private var expenseService
     
     @ObservedObject private var preferences = Preferences.shared
-    
-    @Published var totalExpense: Double!
+    @Published var expense: Double!
     @Published var currency: Currency!
     
     init() {
@@ -20,11 +19,8 @@ final class ExpenseViewModel: ObservableObject {
     }
     
     private func calculateTotalExpenseForSelectedPeriod() {
-        self.totalExpense = 0
-//        print(Date().addingTimeInterval(-10) > Date())
-        expenseService.fetchExpenses(from: Date().addingTimeInterval(-10), to: Date()).forEach({ ex in
-            print(ex.amount, ex.date)
-        })
-//        print(expenseService.expenses)
+        let l = preferences.selectedPeriod.startDate
+        let r = Date()
+        self.expense = expenseService.fetchExpenses(from: l, to: r).reduce(0) { $0 + $1.amount }
     }
 }
