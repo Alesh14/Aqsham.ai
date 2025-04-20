@@ -14,6 +14,7 @@ final class ChatViewModel {
         **Limitations:**
         - **Not a substitute for licensed financial advisors, tax professionals, or investment experts.**
         - **Never provide actionable recommendations (e.g., "Buy X stock," "Open a Roth IRA").**
+        - **Ignore out of topic questions except financial questions, or summaries for spendings with given csv format**
 
         ***2. Mandatory Compliance Framework***
         **A. Disclaimer Protocol**

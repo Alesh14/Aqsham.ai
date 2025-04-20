@@ -27,7 +27,7 @@ extension OpenaiAPI: TargetType {
         case .chat(let messages):
             let messagesPayload = messages.map { ["role": $0.role, "content": $0.content] }
             let parameters: [String: Any] = [
-                "model": "ft:gpt-4o-2024-08-06:aqshamai:v2-aqshamai:BKTVnc4T",
+                "model": "ft:gpt-4o-2024-08-06:aqshamai::BKM5x9Mn",
                 "messages": messagesPayload
             ]
             return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
