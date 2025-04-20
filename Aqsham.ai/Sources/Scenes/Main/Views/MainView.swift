@@ -6,19 +6,17 @@ struct MainView: View {
         static let secondaryColor: Color = .init(hex: "#3C3C43").opacity(0.6)
     }
     
-    @ObservedObject private var preferences = Preferences.shared
-    
     var onTapAddExpense: (() -> Void)?
     var onTapTalkToAgent: (() -> Void)?
     var onTapHistory: (() -> Void)?
+    
+    @ObservedObject private var preferences = Preferences.shared
     
     var body: some View {
         ScrollView (showsIndicators: false) {
             VStack (alignment: .leading, spacing: 0) {                
                 VStack (spacing: 0) {
                     ExpenseView(
-                        expense: 76000.20,
-                        currency: preferences.currency,
                         onTapAddExpense: onTapAddExpense,
                         onTapTalkToAgent: onTapTalkToAgent,
                         onTapHistory: onTapHistory
@@ -30,7 +28,9 @@ struct MainView: View {
                     .padding(.leading, 16)
                     .padding(.bottom, 6)
                 
-                AnalyticsView()
+                AnalyticsView(onTapAddExpense: onTapAddExpense)
+                
+                // TODO: VISUALIZATION
             }
         }
         .insertBackgroundColor()

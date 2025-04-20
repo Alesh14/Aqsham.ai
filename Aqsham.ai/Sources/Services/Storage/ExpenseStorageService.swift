@@ -9,6 +9,8 @@ protocol ExpenseStorageService {
     
     @discardableResult
     func addExpense(amount: Double, date: Date, categoryId: UUID) -> Bool
+    
+    func fetchExpenses(from startDate: Date, to endDate: Date) -> [Expense]
 }
 
 final class ExpenseStorageServiceImpl: ExpenseStorageService {
@@ -28,8 +30,7 @@ final class ExpenseStorageServiceImpl: ExpenseStorageService {
         do {
             let res = try provider.dataStack.fetchAll(
                 From<Expense>()
-//                    .where(\.date >= startDate)
-//                    .where(\.date <= endDate)
+                    .where(\.date > startDate)
             )
             return res
         } catch {

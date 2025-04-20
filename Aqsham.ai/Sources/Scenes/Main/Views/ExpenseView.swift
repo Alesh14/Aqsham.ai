@@ -8,12 +8,11 @@ struct ExpenseView: View {
         static let secondaryTextColor: Color = .init(hex: "#8E8E93")
     }
     
-    let expense: Double
-    let currency: Currency
-    
     var onTapAddExpense: (() -> Void)?
     var onTapTalkToAgent: (() -> Void)?
     var onTapHistory: (() -> Void)?
+    
+    @ObservedObject private var viewModel = ExpenseViewModel()
     
     var body: some View {
         VStack (alignment: .leading, spacing: 0) {
@@ -37,7 +36,7 @@ struct ExpenseView: View {
                 }
             }
             
-            Text("\(expense.formattedWithSpaces) \(currency.rawValue)")
+            Text("\(viewModel.totalExpense.formattedWithSpaces) \(viewModel.currency.rawValue)")
                 .kerning(0.4)
                 .font(.system(size: 34, weight: .bold))
                 
@@ -45,19 +44,13 @@ struct ExpenseView: View {
             
             HStack (spacing: 0) {
                 buildButton(iconName: "plus", title: "Add expense")
-                    .onTapGesture {
-                        onTapAddExpense?()
-                    }
+                    .onTapGesture { onTapAddExpense?() }
                 
                 buildButton(iconName: "message.fill", title: "Talk to AI")
-                    .onTapGesture {
-                        onTapTalkToAgent?()
-                    }
+                    .onTapGesture { onTapTalkToAgent?() }
                 
                 buildButton(iconName: "clock.fill", title: "History")
-                    .onTapGesture {
-                        onTapHistory?()
-                    }
+                    .onTapGesture { onTapHistory?() }
             }
         }
         .frame(alignment: .leading)
@@ -65,6 +58,9 @@ struct ExpenseView: View {
         .padding(.horizontal, 20)
         .background(Layout.backgroundColor)
         .cornerRadius(Layout.cornerRadius)
+        .onAppear {
+            viewModel.refreshTotalExpense()
+        }
     }
     
     private func buildButton(iconName: String, title: String) -> some View {

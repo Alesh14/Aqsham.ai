@@ -26,13 +26,13 @@ final class AddExpenseCoordinator: SubCoordinator {
         let vm = AddExpenseViewModel(router: self)
         let vc = UIHostingController(rootView: AddExpenseView(viewModel: vm))
         vc.insertBackgroundColor()
-        navigationController.pushViewController(vc, animated: false)
+        navigationController.setViewControllers([vc], animated: false)
         self.parentCoordinator = parentCoordinator
         if present {
             self.navigationController.modalPresentationStyle = .popover
             self.parentCoordinator?.navigationController.present(self.navigationController, animated: true)
         } else {
-            self.parentCoordinator?.navigationController.pushViewController(self.navigationController, animated: true)
+            self.parentCoordinator?.navigationController.setViewControllers([self.navigationController], animated: true)
         }
     }
 }

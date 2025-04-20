@@ -13,11 +13,13 @@ struct AnalyticsView: View {
     
     @ObservedObject private var preferences = Preferences.shared
     
+    var onTapAddExpense: (() -> Void)?
+    
     var body: some View {
         VStack(spacing: 0) {
             if viewModel.expenses.isEmpty {
                 VStack (alignment: .leading, spacing: 0) {
-                    Text("Oops! No categories yet. Let’s create one!")
+                    Text("Oops! No expenses yet. Let’s create one!")
                         .font(.system(size: 13, weight: .regular))
                         .foregroundColor(Color(hex: "#939393"))
                         .kerning(-0.08)
@@ -26,9 +28,9 @@ struct AnalyticsView: View {
                     Divider()
                     
                     Button {
-                        
+                        onTapAddExpense?()
                     } label: {
-                        Text("+ Add New Category")
+                        Text("+ Add new expense")
                             .font(.system(size: 17, weight: .regular))
                             .foregroundColor(Color(UIColor.systemBlue))
                             .frame(alignment: .leading)
