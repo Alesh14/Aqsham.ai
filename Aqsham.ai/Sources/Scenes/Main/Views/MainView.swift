@@ -10,6 +10,8 @@ struct MainView: View {
     var onTapTalkToAgent: (() -> Void)?
     var onTapHistory: (() -> Void)?
     
+    
+    
     @ObservedObject private var preferences = Preferences.shared
     
     var body: some View {

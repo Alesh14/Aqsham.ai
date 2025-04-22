@@ -1,13 +1,17 @@
 import Combine
 import SwiftUI
+import CoreStore
 
 final class ExpenseViewModel: ObservableObject {
 
     @Injected(Container.expenseStorageService) private var expenseService
+    @Injected(Container.dataStackProvider) private var dataStackProvider
     
     @ObservedObject private var preferences = Preferences.shared
     @Published var expense: Double!
     @Published var currency: Currency!
+    
+    private var cancellables = Set<AnyCancellable>()
     
     init() {
         self.currency = preferences.currency
