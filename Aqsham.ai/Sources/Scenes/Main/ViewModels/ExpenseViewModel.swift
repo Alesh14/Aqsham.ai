@@ -12,19 +12,26 @@ final class ExpenseViewModel: ObservableObject {
     @Published var currency: Currency!
     
     private var cancellables = Set<AnyCancellable>()
+
+    private var expenses: [Expense] = []
     
     init() {
         self.currency = preferences.currency
         self.calculateTotalExpenseForSelectedPeriod()
     }
     
-    func refreshTotalExpense() {
+    func refreshTotalExpenseIfNeeded() {
         self.calculateTotalExpenseForSelectedPeriod()
     }
     
     private func calculateTotalExpenseForSelectedPeriod() {
         let l = preferences.selectedPeriod.startDate
         let r = Date()
-        self.expense = expenseService.fetchExpenses(from: l, to: r).reduce(0) { $0 + $1.amount }
+        let tempExpenses = expenseService.fetchExpenses(from: l, to: r)
+        if tempExpenses != expenses {
+            self.expenses = tempExpenses
+        }
+        self.expenses = expenseService.fetchExpenses(from: l, to: r)
+        self.expense = expenses.reduce(0) { $0 + $1.amount }
     }
 }

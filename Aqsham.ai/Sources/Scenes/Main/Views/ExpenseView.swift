@@ -1,4 +1,5 @@
 import SwiftUI
+import Combine
 
 struct ExpenseView: View {
     
@@ -11,6 +12,8 @@ struct ExpenseView: View {
     var onTapAddExpense: (() -> Void)?
     var onTapTalkToAgent: (() -> Void)?
     var onTapHistory: (() -> Void)?
+
+    var onAppearPublisher: AnyPublisher<Void, Never>?
     
     @ObservedObject private var viewModel = ExpenseViewModel()
     
@@ -59,7 +62,10 @@ struct ExpenseView: View {
         .background(Layout.backgroundColor)
         .cornerRadius(Layout.cornerRadius)
         .onAppear {
-            viewModel.refreshTotalExpense()
+            viewModel.refreshTotalExpenseIfNeeded()
+        }
+        .onReceive(onAppearPublisher ?? Empty().eraseToAnyPublisher()) { _ in
+            viewModel.refreshTotalExpenseIfNeeded()
         }
     }
     

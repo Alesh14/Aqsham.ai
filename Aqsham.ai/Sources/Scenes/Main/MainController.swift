@@ -41,7 +41,8 @@ final class MainController: UIViewController {
         let hostView = MainView(
             onTapAddExpense: didTapAddExpense,
             onTapTalkToAgent: didTapTalkToAgent,
-            onTapHistory: didTapHistory
+            onTapHistory: didTapHistory,
+            onAppearPublisher: viewModel.onAppearPublisher
         )
         let vc = UIHostingController(rootView: hostView)
         vc.view.backgroundColor = .clear

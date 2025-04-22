@@ -1,4 +1,5 @@
 import SwiftUI
+import Combine
 
 struct MainView: View {
     
@@ -10,7 +11,7 @@ struct MainView: View {
     var onTapTalkToAgent: (() -> Void)?
     var onTapHistory: (() -> Void)?
     
-    
+    var onAppearPublisher: AnyPublisher<Void, Never>?
     
     @ObservedObject private var preferences = Preferences.shared
     
@@ -21,7 +22,8 @@ struct MainView: View {
                     ExpenseView(
                         onTapAddExpense: onTapAddExpense,
                         onTapTalkToAgent: onTapTalkToAgent,
-                        onTapHistory: onTapHistory
+                        onTapHistory: onTapHistory,
+                        onAppearPublisher: onAppearPublisher
                     )
                 }
                 .padding(.bottom, 16)
