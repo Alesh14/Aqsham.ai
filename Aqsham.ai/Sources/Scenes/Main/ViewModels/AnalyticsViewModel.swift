@@ -1,4 +1,5 @@
 import Combine
+import Foundation
 
 final class AnalyticsViewModel: ObservableObject {
     
@@ -6,12 +7,17 @@ final class AnalyticsViewModel: ObservableObject {
     
     @Published var expenses: [ExpenseOverview]!
     
+    private var preferences = Preferences.shared
+    private var cancellables = Set<AnyCancellable>()
+    
     init() {
         fetchExpenses()
+        bind()
     }
     
     func fetchExpenses() {
-        let expenses = expenseStorageService.expenses
+        let selectedPeriod = preferences.selectedPeriod
+        let expenses = expenseStorageService.fetchExpenses(from: selectedPeriod.startDate, to: Date())
         
         var categoryAmountDict: [Category: Double] = [:]
         for expense in expenses {
@@ -26,5 +32,15 @@ final class AnalyticsViewModel: ObservableObject {
             }
             return ExpenseOverview(iconSystemName: icon, categoryName: name, totalAmount: amount)
         }
+        .sorted(by: { $0.totalAmount > $1.totalAmount })
+    }
+    
+    private func bind() {
+        preferences.$selectedPeriod
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                self?.fetchExpenses()
+            }
+            .store(in: &cancellables)
     }
 }

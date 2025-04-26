@@ -34,6 +34,7 @@ struct ExpenseView: View {
                         .kerning(-0.08)
                         .font(.system(size: 13, weight: .medium))
                         .foregroundColor(Layout.secondaryTextColor)
+                        .animation(.bouncy)
                 }
             }
             
