@@ -6,6 +6,7 @@ enum AddExpenseScreenSection {
     case pickCategory(CategoryModel?, ((CategoryModel) -> Void))
     case addCategory
     case goBack
+    case dismiss
 }
 
 protocol AddExpenseScreenRoute: AnyObject {
@@ -17,16 +18,18 @@ final class AddExpenseCoordinator: SubCoordinator {
     var navigationController: UINavigationController
     
     private var parentCoordinator: Coordinator?
+    private var onCompletion: (() -> Void)?
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
     }
     
-    func start(in parentCoordinator: any Coordinator, present: Bool) {
+    func start(in parentCoordinator: any Coordinator, present: Bool, onCompletion: (() -> Void)? = nil) {
         let vm = AddExpenseViewModel(router: self)
         let vc = UIHostingController(rootView: AddExpenseView(viewModel: vm))
         vc.insertBackgroundColor()
         navigationController.setViewControllers([vc], animated: false)
+        self.onCompletion = onCompletion
         self.parentCoordinator = parentCoordinator
         if present {
             self.navigationController.modalPresentationStyle = .popover
@@ -58,6 +61,10 @@ extension AddExpenseCoordinator: AddExpenseScreenRoute {
             
         case .goBack:
             navigationController.popViewController(animated: true)
+            
+        case .dismiss:
+            navigationController.dismiss(animated: true)
+            onCompletion?()
         }
     }
 }

@@ -13,7 +13,7 @@ struct Message: Equatable, Identifiable {
 }
 
 struct ChatView: View {
-        
+    
     private enum Layout {
         static let textFieldCornerRadius: CGFloat = 16
     }
@@ -23,14 +23,15 @@ struct ChatView: View {
     @State private var userInput: String = ""
     @State private var isKeyboardOpen: Bool = false
     @State private var messages: [Message] = []
-    
     @State private var showPlaceholder: Bool = true
+    @State private var isThinking: Bool = false
+    
     private var shouldShowPlaceholder: Bool {
         !isKeyboardOpen && messages.isEmpty
     }
     
     var body: some View {
-        VStack (spacing: 0) {
+        VStack(spacing: 0) {
             Spacer()
             
             if showPlaceholder {
@@ -74,18 +75,34 @@ struct ChatView: View {
     
     private func didTapSendButton() {
         hideKeyboard()
-        viewModel.sendChatMessage(message: userInput) { result in
+        
+        let userMessage = Message(role: .user, text: userInput)
+        messages.append(userMessage)
+        
+        userInput.erase()
+        isThinking = true
+        
+        let thinkingMessage = Message(role: .assistant, text: "__typing__")
+        messages.append(thinkingMessage)
+        
+        viewModel.sendChatMessage(message: userMessage.text) { result in
+            isThinking = false
+            
+            // Remove the typing indicator
+            if let index = messages.firstIndex(where: { $0.text == "__typing__" }) {
+                messages.remove(at: index)
+            }
+            
             switch result {
             case .success(let data):
-            if let choice = data.choices.first {
-                messages.append(Message(role: .assistant, text: choice.message.content))
-            }
+                if let choice = data.choices.first {
+                    messages.append(Message(role: .assistant, text: choice.message.content))
+                }
             case .failure(let error):
                 print(error)
+                messages.append(Message(role: .assistant, text: "Something went wrong. Please try again."))
             }
         }
-        messages.append(Message(role: .user, text: userInput))
-        userInput.erase()
     }
     
     private func buildMessages() -> some View {
@@ -129,11 +146,19 @@ struct ChatView: View {
         }
     }
     
-    private func parseText(_ input: String) -> Text {
+    private func parseText(_ input: String) -> some View {
+        if input == "__typing__" {
+            return HStack(spacing: 4) {
+                Text("Assistant is typing")
+                    .font(.system(size: 15))
+                    .italic()
+                    .foregroundColor(.gray)
+                TypingDotsView()
+            }
+        }
+        
         var result = Text("")
-        
         let regex = try! NSRegularExpression(pattern: "(\\*\\*\\*([^*]+)\\*\\*\\*)|(\\*\\*([^*]+)\\*\\*)", options: [])
-        
         var lastIndex = input.startIndex
         
         for match in regex.matches(in: input, range: NSRange(input.startIndex..., in: input)) {
@@ -157,12 +182,12 @@ struct ChatView: View {
         let trailing = String(input[lastIndex...])
         result = result + Text(trailing)
         
-        return result.font(.system(size: 15))
+        return AnyView(result.font(.system(size: 15)))
     }
     
     @ViewBuilder
     private func buildTextField() -> some View {
-        VStack (spacing: 0) {
+        VStack(spacing: 0) {
             if messages.isEmpty {
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 8) {
@@ -176,14 +201,13 @@ struct ChatView: View {
                 .padding(.horizontal)
             }
             
-            Spacer()
-                .frame(height: 8)
+            Spacer().frame(height: 8)
             
             ZStack {
                 Color.white
                 
-                VStack (spacing: 6) {
-                    HStack (spacing: 0) {
+                VStack(spacing: 6) {
+                    HStack(spacing: 0) {
                         TextField("Ask anything", text: $userInput, onEditingChanged: { isEditing in
                             isKeyboardOpen = isEditing
                         })
@@ -193,7 +217,7 @@ struct ChatView: View {
                     .padding(.bottom, 8)
                     .padding(.horizontal)
                     
-                    HStack (spacing: 0) {
+                    HStack(spacing: 0) {
                         Spacer()
                         
                         Button {
@@ -226,11 +250,11 @@ struct ChatView: View {
     @ViewBuilder
     private func suggestionButton(title: String) -> some View {
         Button(action: {
-            
+            userInput = title
+            didTapSendButton()
         }) {
             ZStack {
                 Color.white
-                
                 Text(title)
                     .multilineTextAlignment(.leading)
                     .lineLimit(nil)
@@ -247,7 +271,6 @@ struct ChatView: View {
 }
 
 private extension View {
-    
     func hideKeyboard() {
         UIApplication.shared.sendAction(
             #selector(UIResponder.resignFirstResponder),
@@ -257,8 +280,26 @@ private extension View {
 }
 
 private extension String {
-    
     mutating func erase() {
         self = ""
+    }
+}
+
+struct TypingDotsView: View {
+    @State private var dots = ""
+
+    var body: some View {
+        Text(dots)
+            .onAppear {
+                Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { _ in
+                    if dots.count >= 3 {
+                        dots = ""
+                    } else {
+                        dots += "."
+                    }
+                }
+            }
+            .font(.system(size: 15))
+            .foregroundColor(.gray)
     }
 }

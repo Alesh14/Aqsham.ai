@@ -11,5 +11,5 @@ protocol SubCoordinator: AnyObject {
     
     var navigationController: UINavigationController { get }
     
-    func start(in parentCoordinator: any Coordinator, present: Bool)
+    func start(in parentCoordinator: any Coordinator, present: Bool, onCompletion: (() -> Void)?)
 }

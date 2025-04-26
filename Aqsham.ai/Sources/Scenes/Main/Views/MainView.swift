@@ -32,7 +32,7 @@ struct MainView: View {
                     .padding(.leading, 16)
                     .padding(.bottom, 6)
                 
-                AnalyticsView(onTapAddExpense: onTapAddExpense)
+                AnalyticsView(onTapAddExpense: onTapAddExpense, onAppearPublisher: onAppearPublisher)
                 
                 // TODO: VISUALIZATION
             }

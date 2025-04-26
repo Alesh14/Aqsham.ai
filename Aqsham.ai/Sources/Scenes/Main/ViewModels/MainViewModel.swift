@@ -8,7 +8,7 @@ final class MainViewModel {
         onAppearSubject.eraseToAnyPublisher()
     }
     
-    private var onAppearSubject: PassthroughSubject<Void, Never> = .init()
+    var onAppearSubject: PassthroughSubject<Void, Never> = .init()
     
     init(router: MainScreenRoute) {
         self.router = router

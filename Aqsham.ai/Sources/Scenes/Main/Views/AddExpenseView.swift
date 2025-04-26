@@ -137,6 +137,7 @@ struct AddExpenseView: View {
         }
         
         viewModel.addExpense(amount: amoutValue, date: selectedDate, categoryID: categoryModel.id)
+        viewModel.navigate(to: .dismiss)
     }
     
     private func didTapCategory() {

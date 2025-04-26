@@ -3,7 +3,7 @@ import SwiftUI
 
 enum MainScreenSection {
     case chat
-    case addExpense
+    case addExpense((() -> ()))
 }
 
 protocol MainScreenRoute: AnyObject {
@@ -37,8 +37,8 @@ extension MainCoordinator: MainScreenRoute {
             vc.hidesBottomBarWhenPushed = true
             navigationController.pushViewController(vc, animated: true)
             
-        case .addExpense:
-            addExpenseCoordinator.start(in: self, present: true)
+        case .addExpense(let completion):
+            addExpenseCoordinator.start(in: self, present: true, onCompletion: completion)
         }
     }
 }

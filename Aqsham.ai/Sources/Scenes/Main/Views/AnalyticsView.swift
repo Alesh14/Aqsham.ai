@@ -1,4 +1,5 @@
 import SwiftUI
+import Combine
 
 struct AnalyticsView: View {
     
@@ -14,6 +15,7 @@ struct AnalyticsView: View {
     @ObservedObject private var preferences = Preferences.shared
     
     var onTapAddExpense: (() -> Void)?
+    var onAppearPublisher: AnyPublisher<Void, Never>?
     
     var body: some View {
         VStack(spacing: 0) {
@@ -67,7 +69,7 @@ struct AnalyticsView: View {
         }
         .background(Layout.backgroundColor)
         .cornerRadius(Layout.cornerRadius)
-        .onAppear {
+        .onReceive(onAppearPublisher ?? Empty().eraseToAnyPublisher()) { _ in
             viewModel.fetchExpenses()
         }
     }

@@ -19,11 +19,19 @@ final class MainController: UIViewController {
         super.viewDidLoad()
         configUI()
     }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.onAppearSubject.send()
+    }
     
     private func didTapHistory() {}
     
     private func didTapAddExpense() {
-        viewModel.navigate(to: .addExpense)
+        viewModel.navigate(to: .addExpense({ [weak self] in
+            guard let self else { return }
+            self.viewModel.onAppearSubject.send()
+        }))
     }
     
     private func didTapTalkToAgent() {

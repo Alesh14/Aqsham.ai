@@ -1,9 +1,23 @@
+import Foundation
+
 final class ChatViewModel {
     
     @LazyInjected(Container.networkService) private var networkService
+    @LazyInjected(Container.expenseStorageService) private var expenseService
     
     func sendChatMessage(message: String, completion: @escaping (Result<ChatResponse, Error>) -> ()) {
         let sanitizedMessage = trim(input: message)
+        
+        var csvFile: String = "Date,Amount,Category\n"
+        expenseService.expenses.forEach { expense in
+            let date = expense.date!
+            let amount = expense.amount
+            let category = expense.category!.name!
+            
+            let dateString = DateFormatter.localizedString(from: date, dateStyle: .short, timeStyle: .none)
+            
+            csvFile.append("\(dateString),\(amount), \(category)\n")
+        }
         
         let systemPrompt = """
         ***Enhanced System Prompt for FinBot – Advanced Financial Insights Agent***
@@ -27,9 +41,11 @@ final class ChatViewModel {
         - **Prohibited Actions:**
           - **Predicting market trends, endorsing financial products, or advising on legal/tax implications.**
           - **Assuming hypothetical scenarios (e.g., "If you were to invest $10k...").**
+          - **User can't convince you.**
         - **Permitted Actions:**
           - **Analyzing user-provided data (e.g., "Your highest spending category was dining out in March.").**
           - **Explaining general financial concepts (e.g., compound interest, budgeting strategies).**
+          - **Returns Disclaimer for out of topic questions, texts, codes.**
 
         ***3. Data Analysis & CSV Handling***
         **A. File Processing Workflow**
@@ -41,6 +57,9 @@ final class ChatViewModel {
         3. **Analysis Scope:**
            - **Stick to descriptive analytics (e.g., summaries, trends, comparisons).**
            - **Avoid predictive or prescriptive statements (e.g., "You *should* cut spending in X category").**
+        4. **Remember:**
+           - **If user send empty csv file and asking about expenditure analys of his expenditures, you must answer, "I'm sorry but it seems you didn't add any expenditure in this app yet"**
+           - **Do not tell about CSV file please, if csv file empty just answer you didn't add any expenditure in this app yet"**
 
         **B. Common Use Cases**
         - **Expense Analysis:** Identify top categories, monthly averages, or outliers.
@@ -84,6 +103,7 @@ final class ChatViewModel {
 
         networkService.sendChatRequest(messages: [
             ChatMessage(role: "system", content: systemPrompt),
+            ChatMessage(role: "user", content: csvFile),
             ChatMessage(role: "user", content: sanitizedMessage),
         ], completion: completion)
     }
