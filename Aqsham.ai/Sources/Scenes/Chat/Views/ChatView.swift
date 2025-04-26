@@ -148,13 +148,13 @@ struct ChatView: View {
     
     private func parseText(_ input: String) -> some View {
         if input == "__typing__" {
-            return HStack(spacing: 4) {
+            return AnyView(HStack(spacing: 4) {
                 Text("Assistant is typing")
                     .font(.system(size: 15))
                     .italic()
                     .foregroundColor(.gray)
                 TypingDotsView()
-            }
+            })
         }
         
         var result = Text("")

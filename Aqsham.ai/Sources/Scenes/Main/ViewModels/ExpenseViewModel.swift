@@ -8,6 +8,8 @@ final class ExpenseViewModel: ObservableObject {
     @Injected(Container.dataStackProvider) private var dataStackProvider
     
     @ObservedObject private var preferences = Preferences.shared
+
+    @Published var period: String!
     @Published var expense: Double!
     @Published var currency: Currency!
     
@@ -16,12 +18,26 @@ final class ExpenseViewModel: ObservableObject {
     private var expenses: [Expense] = []
     
     init() {
+        self.period = preferences.selectedPeriod.rawValue
         self.currency = preferences.currency
         self.calculateTotalExpenseForSelectedPeriod()
     }
     
     func refreshTotalExpenseIfNeeded() {
         self.calculateTotalExpenseForSelectedPeriod()
+    }
+    
+    func didTapPeriod() {
+        let storedPeriod = preferences.selectedPeriod
+        switch storedPeriod {
+        case .lastDay:
+            preferences.selectedPeriod = .lastWeek
+        case .lastWeek:
+            preferences.selectedPeriod = .lastMonth
+        case .lastMonth:
+            preferences.selectedPeriod = .lastDay
+        }
+        self.period = preferences.selectedPeriod.rawValue
     }
     
     private func calculateTotalExpenseForSelectedPeriod() {

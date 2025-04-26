@@ -27,14 +27,12 @@ struct ExpenseView: View {
                 
                 Spacer()
                 
-                HStack(spacing: 4) {
-                    Text("Last Month")
+                Button {
+                    viewModel.didTapPeriod()
+                } label: {
+                    Text(viewModel.period)
                         .kerning(-0.08)
                         .font(.system(size: 13, weight: .medium))
-                        .foregroundColor(Layout.secondaryTextColor)
-                    
-                    Image(systemName: "chevron.down")
-                        .font(.system(size: 13, weight: .bold))
                         .foregroundColor(Layout.secondaryTextColor)
                 }
             }

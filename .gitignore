@@ -49,3 +49,4 @@ playground.xcworkspace
 # Provisioning
 *.mobileprovision
 *.provisionprofile
+UserInterfaceState.xcuserstate
