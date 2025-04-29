@@ -74,7 +74,7 @@ struct AnalyticsView: View {
         }
     }
     
-    private func buildIcon(expense: ExpenseOverview) -> some View {
+    private func buildIcon(expense: ExpenseItem) -> some View {
         ZStack {
             Layout.iconBackgroundColor
             Image(systemName: expense.iconSystemName)

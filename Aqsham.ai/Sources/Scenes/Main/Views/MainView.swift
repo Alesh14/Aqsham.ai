@@ -33,8 +33,13 @@ struct MainView: View {
                     .padding(.bottom, 6)
                 
                 AnalyticsView(onTapAddExpense: onTapAddExpense, onAppearPublisher: onAppearPublisher)
+                    .padding(.bottom, 16)
                 
-                // TODO: VISUALIZATION
+                buildSectionTitle("Visualization".uppercased())
+                    .padding(.leading, 16)
+                    .padding(.bottom, 6)
+                
+                ExpensePieChartView()
             }
         }
         .insertBackgroundColor()

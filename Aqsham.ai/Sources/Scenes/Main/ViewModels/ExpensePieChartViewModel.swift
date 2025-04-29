@@ -1,11 +1,11 @@
 import Combine
 import Foundation
 
-final class AnalyticsViewModel: ObservableObject {
+final class ExpensePieChartViewModel: ObservableObject {
     
-    @LazyInjected(Container.expenseStorageService) private var expenseStorageService
+    @Injected(Container.expenseStorageService) private var expenseStorageService
     
-    @Published var expenses: [ExpenseItem]!
+    @Published var data: [ExpenseItem] = []
     
     private var preferences = Preferences.shared
     private var cancellables = Set<AnyCancellable>()
@@ -26,7 +26,7 @@ final class AnalyticsViewModel: ObservableObject {
             }
         }
         
-        self.expenses = categoryAmountDict.compactMap { category, amount in
+        self.data = categoryAmountDict.compactMap { category, amount in
             guard let name = category.name, let icon = category.icon else {
                 return nil
             }
