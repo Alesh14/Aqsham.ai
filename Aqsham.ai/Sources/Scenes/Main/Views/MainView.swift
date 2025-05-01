@@ -11,6 +11,8 @@ struct MainView: View {
     var onTapTalkToAgent: (() -> Void)?
     var onTapHistory: (() -> Void)?
     
+    var onTapOpenExpenseDetails: ((ExpenseItem) -> Void)?
+    
     var onAppearPublisher: AnyPublisher<Void, Never>?
     
     @ObservedObject private var preferences = Preferences.shared
@@ -32,7 +34,7 @@ struct MainView: View {
                     .padding(.leading, 16)
                     .padding(.bottom, 6)
                 
-                AnalyticsView(onTapAddExpense: onTapAddExpense, onAppearPublisher: onAppearPublisher)
+                AnalyticsView(onTapAddExpense: onTapAddExpense, onAppearPublisher: onAppearPublisher, onTapOpenExpenseDetails: onTapOpenExpenseDetails)
                     .padding(.bottom, 16)
                 
                 buildSectionTitle("Visualization".uppercased())

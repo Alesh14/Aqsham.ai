@@ -5,4 +5,5 @@ struct ExpenseItem: Identifiable, Equatable {
     let iconSystemName: String
     let categoryName: String
     let totalAmount: Double
+    var expenses: [Expense]
 }

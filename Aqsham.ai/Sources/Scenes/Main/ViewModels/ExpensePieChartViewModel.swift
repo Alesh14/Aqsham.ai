@@ -29,10 +29,9 @@ final class ExpensePieChartViewModel: ObservableObject {
         }
         
         self.data = categoryAmountDict.compactMap { category, amount in
-            guard let name = category.name, let icon = category.icon else {
-                return nil
-            }
-            return ExpenseItem(iconSystemName: icon, categoryName: name, totalAmount: amount)
+            let name = category.name!
+            let icon = category.icon!
+            return ExpenseItem(iconSystemName: icon, categoryName: name, totalAmount: amount, expenses: [])
         }
         .sorted(by: { $0.totalAmount > $1.totalAmount })
     }

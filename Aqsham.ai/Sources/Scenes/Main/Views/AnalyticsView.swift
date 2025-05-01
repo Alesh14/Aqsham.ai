@@ -16,6 +16,7 @@ struct AnalyticsView: View {
     
     var onTapAddExpense: (() -> Void)?
     var onAppearPublisher: AnyPublisher<Void, Never>?
+    var onTapOpenExpenseDetails: ((ExpenseItem) -> Void)?
     
     var body: some View {
         VStack(spacing: 0) {
@@ -60,6 +61,9 @@ struct AnalyticsView: View {
                         
                     }
                     .padding(.vertical, 12)
+                    .onTapGesture {
+                        didTapExpense(expense.wrappedValue)
+                    }
                     
                     if viewModel.expenses.last! != expense.wrappedValue {
                         Divider()
@@ -72,6 +76,10 @@ struct AnalyticsView: View {
         .onReceive(onAppearPublisher ?? Empty().eraseToAnyPublisher()) { _ in
             viewModel.fetchExpenses()
         }
+    }
+    
+    private func didTapExpense(_ expense: ExpenseItem) {
+        onTapOpenExpenseDetails?(expense)
     }
     
     private func buildIcon(expense: ExpenseItem) -> some View {

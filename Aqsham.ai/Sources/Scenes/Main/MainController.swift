@@ -50,6 +50,9 @@ final class MainController: UIViewController {
             onTapAddExpense: didTapAddExpense,
             onTapTalkToAgent: didTapTalkToAgent,
             onTapHistory: didTapHistory,
+            onTapOpenExpenseDetails: ({ [weak self] expenseItem in
+                self?.viewModel.navigate(to: .expenseDetail(expenseItem))
+            }),
             onAppearPublisher: viewModel.onAppearPublisher
         )
         let vc = UIHostingController(rootView: hostView)

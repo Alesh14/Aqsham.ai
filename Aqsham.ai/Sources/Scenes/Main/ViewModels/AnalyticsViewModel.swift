@@ -27,10 +27,16 @@ final class AnalyticsViewModel: ObservableObject {
         }
         
         self.expenses = categoryAmountDict.compactMap { category, amount in
-            guard let name = category.name, let icon = category.icon else {
-                return nil
-            }
-            return ExpenseItem(iconSystemName: icon, categoryName: name, totalAmount: amount)
+            let name = category.name!
+            let icon = category.icon!
+            return ExpenseItem(
+                iconSystemName: icon,
+                categoryName: name,
+                totalAmount: amount,
+                expenses: expenses.filter({ expense in
+                    expense.category?.id == category.id
+                })
+            )
         }
         .sorted(by: { $0.totalAmount > $1.totalAmount })
     }

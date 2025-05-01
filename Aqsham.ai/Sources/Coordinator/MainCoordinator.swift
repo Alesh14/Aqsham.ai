@@ -4,6 +4,7 @@ import SwiftUI
 enum MainScreenSection {
     case chat
     case addExpense((() -> ()))
+    case expenseDetail(ExpenseItem)
 }
 
 protocol MainScreenRoute: AnyObject {
@@ -39,6 +40,12 @@ extension MainCoordinator: MainScreenRoute {
             
         case .addExpense(let completion):
             addExpenseCoordinator.start(in: self, present: true, onCompletion: completion)
+            
+        case .expenseDetail(let item):
+            let vc = UIHostingController(rootView: ExpenseDetailsView(item: item))
+            vc.view.backgroundColor = .clear
+            vc.modalPresentationStyle = .formSheet
+            navigationController.present(vc, animated: true)
         }
     }
 }
