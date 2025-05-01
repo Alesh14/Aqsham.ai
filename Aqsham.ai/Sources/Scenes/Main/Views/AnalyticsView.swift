@@ -53,6 +53,7 @@ struct AnalyticsView: View {
                             .padding(.leading, 12)
                         
                         Spacer()
+                            .contentShape(Rectangle())
                         
                         Text("\(expense.wrappedValue.totalAmount.formattedWithSpaces) \(preferences.currency.rawValue)")
                             .font(.system(size: 16, weight: .regular))
@@ -60,6 +61,7 @@ struct AnalyticsView: View {
                             .padding(.trailing, 16)
                         
                     }
+                    .contentShape(Rectangle())
                     .padding(.vertical, 12)
                     .onTapGesture {
                         didTapExpense(expense.wrappedValue)

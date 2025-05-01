@@ -43,7 +43,6 @@ extension MainCoordinator: MainScreenRoute {
             
         case .expenseDetail(let item):
             let vc = UIHostingController(rootView: ExpenseDetailsView(item: item))
-            vc.view.backgroundColor = .clear
             vc.modalPresentationStyle = .formSheet
             navigationController.present(vc, animated: true)
         }

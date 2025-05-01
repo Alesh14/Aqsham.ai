@@ -8,7 +8,7 @@ struct ExpenseDetailsView: View {
         VStack {
             
         }
-        .frame(height: 500)
+        .insertBackgroundColor()
         .navigationTitle(item.categoryName)
     }
 }
