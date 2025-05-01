@@ -45,14 +45,23 @@ struct ExpenseView: View {
             Spacer().frame(height: 32)
             
             HStack (spacing: 0) {
-                buildButton(iconName: "plus", title: "Add expense")
-                    .onTapGesture { onTapAddExpense?() }
+                ScaleableButtonView {
+                    buildButton(iconName: "plus", title: "Add expense")
+                } onTapCompletion: {
+                    onTapAddExpense?()
+                }
                 
-                buildButton(iconName: "message.fill", title: "Talk to AI")
-                    .onTapGesture { onTapTalkToAgent?() }
+                ScaleableButtonView {
+                    buildButton(iconName: "message.fill", title: "Talk to AI")
+                } onTapCompletion: {
+                    onTapTalkToAgent?()
+                }
                 
-                buildButton(iconName: "clock.fill", title: "History")
-                    .onTapGesture { onTapHistory?() }
+                ScaleableButtonView {
+                    buildButton(iconName: "clock.fill", title: "History")
+                } onTapCompletion: {
+                    onTapHistory?()
+                }
             }
         }
         .frame(alignment: .leading)

@@ -9,8 +9,10 @@ final class ExpensePieChartViewModel: ObservableObject {
     
     private var preferences = Preferences.shared
     private var cancellables = Set<AnyCancellable>()
+    private var onAppearPublisher: AnyPublisher<Void, Never>?
     
-    init() {
+    init(onAppearPublisher: AnyPublisher<Void, Never>?) {
+        self.onAppearPublisher = onAppearPublisher
         fetchExpenses()
         bind()
     }

@@ -39,7 +39,7 @@ struct MainView: View {
                     .padding(.leading, 16)
                     .padding(.bottom, 6)
                 
-                ExpensePieChartView()
+                ExpensePieChartView(onAppearPublisher: onAppearPublisher)
             }
         }
         .insertBackgroundColor()

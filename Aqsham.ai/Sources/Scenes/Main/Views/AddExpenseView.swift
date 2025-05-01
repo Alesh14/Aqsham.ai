@@ -113,21 +113,17 @@ struct AddExpenseView: View {
                         .foregroundColor(.blue)
                         .font(.system(size: 17, weight: .semibold))
                 }
+                .disabled(selectedDate > Date() || amount.isEmpty || categoryModel == nil)
+                .opacity(selectedDate > Date() || amount.isEmpty || categoryModel == nil ? 0.5 : 1)
             }
         }
     }
     
     private func didTapAdd() {
         hideKeyboardIfNeeded()
-        if amount.isEmpty {
-            amountMessage = "Fill amount"
-        }
+
         guard let categoryModel else {
             categoryMessage = "Select category"
-            return
-        }
-        
-        if !amountMessage.isEmpty || !categoryMessage.isEmpty {
             return
         }
         

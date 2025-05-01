@@ -1,26 +1,55 @@
 import Charts
 import SwiftUI
+import Combine
 
 struct ExpensePieChartView: View {
     
-    @ObservedObject private var viewModel = ExpensePieChartViewModel()
+    private enum Layout {
+        static let backgroundColor: Color = .white
+        static let cornerRadius: CGFloat = 12
+    }
+    
+    @ObservedObject private var viewModel: ExpensePieChartViewModel
+    
+    var onAppearPublisher: AnyPublisher<Void, Never>?
+
+    init(onAppearPublisher: AnyPublisher<Void, Never>? = nil) {
+        self.onAppearPublisher = onAppearPublisher
+        self.viewModel = ExpensePieChartViewModel(onAppearPublisher: onAppearPublisher)
+    }
 
     var body: some View {
-        Chart(viewModel.data, id: \.categoryName) { item in
-            SectorMark(
-                angle: .value("Amount", item.totalAmount),
-                innerRadius: .ratio(0.5),
-                angularInset: 1
-            )
-            .foregroundStyle(by: .value("Category", item.categoryName))
-            .annotation(position: .overlay) {
-                Text(item.categoryName)
-                    .font(.caption2)
-                    .foregroundColor(.white)
+        if viewModel.data.isEmpty {
+            HStack {
+                Text("There's not enough data to show.")
+                    .font(.system(size: 13, weight: .regular))
+                    .foregroundColor(Color(hex: "#939393"))
+                    .kerning(-0.08)
+                    .padding(20)
+                    .multilineTextAlignment(.leading)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                
+                Spacer()
             }
+            .background(Layout.backgroundColor)
+            .cornerRadius(Layout.cornerRadius)
+        } else {
+            Chart(viewModel.data, id: \.categoryName) { item in
+                SectorMark(
+                    angle: .value("Amount", item.totalAmount),
+                    innerRadius: .ratio(0.5),
+                    angularInset: 1
+                )
+                .foregroundStyle(by: .value("Category", item.categoryName))
+                .annotation(position: .overlay) {
+                    Text(item.categoryName)
+                        .font(.caption2)
+                        .foregroundColor(.white)
+                }
+            }
+            .chartLegend(.visible)
+            .frame(height: 200, alignment: .leading)
+            .padding()
         }
-        .chartLegend(.visible)
-        .frame(height: 300)
-        .padding()
     }
 }
