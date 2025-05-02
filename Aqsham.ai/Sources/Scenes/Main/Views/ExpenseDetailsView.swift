@@ -12,6 +12,26 @@ struct ExpenseDetailsView: View {
         NavigationView {
             ScrollView {
                 VStack (spacing: 12) {
+                    HStack {
+                        VStack (alignment: .leading, spacing: 0) {
+                            Text("Total")
+                                .font(.system(size: 16, weight: .semibold))
+                                .foregroundColor(.black)
+                            
+                            Text(item.totalAmount.formattedWithSpaces)
+                                .font(.system(size: 16, weight: .regular))
+                                .foregroundColor(.black)
+                        }
+                        .padding(.leading, 30)
+                        
+                        Spacer()
+                        
+                        Text("\(Preferences.shared.selectedPeriod.startDate.formatted) - \(Date().formatted)")
+                            .font(.system(size: 18, weight: .semibold))
+                            .foregroundColor(Layout.secondaryColor)
+                            .padding(.trailing, 30)
+                    }
+                    
                     ForEach(item.expenses, id: \.self) { (expense: Expense) in
                         VStack (alignment: .leading, spacing: 0) {
                             Text(expense.date?.formatted ?? "some day")
@@ -28,7 +48,7 @@ struct ExpenseDetailsView: View {
                                     Text(expense.amount.formattedWithSpaces)
                                         .font(.system(size: 16, weight: .regular))
                                         .foregroundColor(.black)
-                                        .padding(.leading, 14)
+                                        .multilineTextAlignment(.leading)
                                         .frame(width: 150, alignment: .leading)
                                     
                                     Spacer()

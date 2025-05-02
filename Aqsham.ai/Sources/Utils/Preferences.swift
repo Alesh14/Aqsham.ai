@@ -17,10 +17,10 @@ enum Period: String {
         switch self {
         case .currentDay:
             return Calendar.current.startOfDay(for: Date())
-            case .currentWeek:
-                return Calendar.current.date(from: Calendar.current.dateComponents([.yearForWeekOfYear, .weekOfYear], from: Date()))!
-            case .currentMonth:
-                return Calendar.current.date(from: Calendar.current.dateComponents([.year, .month], from: Date()))!
+        case .currentWeek:
+            return Calendar.current.date(from: Calendar.current.dateComponents([.yearForWeekOfYear, .weekOfYear], from: Date()))!
+        case .currentMonth:
+            return Calendar.current.date(from: Calendar.current.dateComponents([.year, .month], from: Date()))!
         }
     }
 }
