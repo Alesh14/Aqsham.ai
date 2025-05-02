@@ -32,6 +32,8 @@ struct ExpenseDetailsView: View {
                             .padding(.trailing, 30)
                     }
                     
+                    Spacer().frame(height: 4)
+                    
                     ForEach(item.expenses, id: \.self) { (expense: Expense) in
                         VStack (alignment: .leading, spacing: 0) {
                             Text(expense.date?.formatted ?? "some day")
