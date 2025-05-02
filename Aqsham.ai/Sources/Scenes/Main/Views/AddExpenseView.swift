@@ -131,6 +131,15 @@ struct AddExpenseView: View {
                 .disabled(selectedDate > Date() || amount.isEmpty || categoryModel == nil)
                 .opacity(selectedDate > Date() || amount.isEmpty || categoryModel == nil ? 0.5 : 1)
             }
+            ToolbarItem(placement: .topBarLeading) {
+                Button {
+                    viewModel.navigate(to: .dismiss)
+                } label: {
+                    Text("Back")
+                        .foregroundColor(.blue)
+                        .font(.system(size: 17, weight: .semibold))
+                }
+            }
         }
     }
     

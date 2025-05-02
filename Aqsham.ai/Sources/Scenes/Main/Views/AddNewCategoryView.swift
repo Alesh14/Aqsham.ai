@@ -90,22 +90,13 @@ struct AddNewCategoryView: View {
                         .foregroundColor(.blue)
                         .font(.system(size: 17, weight: .medium))
                 }
+                .disabled(title.isEmpty || iconString == nil)
+                .opacity(title.isEmpty || iconString == nil ? 0.5 : 1)
             }
         }
     }
     
     private func didTapAddNewCategory() {
-        var shouldReturn: Bool = false
-        if title.isEmpty {
-            titleMessage = "Fill Title"
-            shouldReturn = true
-        }
-        if iconString == nil {
-            shouldReturn = true
-        }
-        if shouldReturn {
-            return
-        }
         if viewModel.checkCategoryExists(title: title) {
             titleMessage = "Category already exists"
             title = ""

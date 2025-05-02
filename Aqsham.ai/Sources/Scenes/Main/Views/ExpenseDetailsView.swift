@@ -47,13 +47,13 @@ struct ExpenseDetailsView: View {
                             
                             HStack {
                                 VStack (alignment: .leading) {
-                                    Text(expense.amount.formattedWithSpaces)
+                                    Text("\(expense.amount.formattedWithSpaces) \(Preferences.shared.currency.rawValue)")
                                         .font(.system(size: 16, weight: .regular))
                                         .foregroundColor(.black)
                                         .multilineTextAlignment(.leading)
                                         .frame(width: 150, alignment: .leading)
                                     
-                                    Spacer()
+                                        Spacer()
                                 }
                                 
                                 Spacer()
