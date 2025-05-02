@@ -1,4 +1,5 @@
 import UIKit
+import SwiftUI
 import CoreStore
 
 final class SettingsController: UIViewController {
@@ -8,19 +9,14 @@ final class SettingsController: UIViewController {
         configUI()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-//        try? provider.dataStack.perform { transaction in
-//            let expense = transaction.create(Into<Expense>())
-//            expense.id = 1
-//            expense.title = "Fruits"
-//        }
-//        
-//        let expenses = try? provider.dataStack.fetchAll(From<Expense>())
-        
+    private func configUI() {
         
     }
+}
+
+struct SettingsView: View {
     
-    private func configUI() {
+    var body: some View {
         
     }
 }

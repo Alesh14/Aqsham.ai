@@ -193,7 +193,7 @@ struct ChatView: View {
                     HStack(spacing: 8) {
                         suggestionButton(title: "How to be financially\neducated?")
                         suggestionButton(title: "My expenditure for\nlast month")
-                        suggestionButton(title: "Plan my expenses for\nnext month")
+                        suggestionButton(title: "10 tips to be\nfinancially educated")
                         Spacer()
                     }
                 }
