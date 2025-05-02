@@ -30,6 +30,12 @@ enum Gender: String {
     case female = "Female"
 }
 
+enum Lanugage: String {
+    case kazakh
+    case english
+    case russian
+}
+
 final class Preferences: ObservableObject {
     
     private enum Keys {
@@ -38,6 +44,7 @@ final class Preferences: ObservableObject {
         static let userName = "userName"
         static let gender = "gender"
         static let age = "age"
+        static let language = "language"
     }
     
     static let shared = Preferences()
@@ -58,6 +65,9 @@ final class Preferences: ObservableObject {
     }
     @Published var age: Int? = nil {
         didSet { UserDefaults.standard.set(age, forKey: Keys.age) }
+    }
+    @Published var language: Lanugage {
+        didSet { UserDefaults.standard.set(age, forKey: Keys.language) }
     }
     
     private init() {
@@ -85,6 +95,12 @@ final class Preferences: ObservableObject {
         
         if let string = UserDefaults.standard.string(forKey: Keys.gender), let value = Gender(rawValue: string) {
             gender = value
+        }
+        
+        if let string = UserDefaults.standard.string(forKey: Keys.language), let value = Lanugage(rawValue: string) {
+            language = value
+        } else {
+            language = .english
         }
     }
 }
