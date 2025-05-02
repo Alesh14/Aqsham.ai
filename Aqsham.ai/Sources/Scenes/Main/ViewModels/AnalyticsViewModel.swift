@@ -19,11 +19,14 @@ final class AnalyticsViewModel: ObservableObject {
         let selectedPeriod = preferences.selectedPeriod
         let expenses = expenseStorageService.fetchExpenses(from: selectedPeriod.startDate, to: Date())
         
+        print(selectedPeriod.startDate)
+        
         var categoryAmountDict: [Category: Double] = [:]
         for expense in expenses {
             if let category = expense.category {
                 categoryAmountDict[category, default: 0.0] += expense.amount
             }
+            print(expense.amount, expense.date, expense.category)
         }
         
         self.expenses = categoryAmountDict.compactMap { category, amount in

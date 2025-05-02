@@ -30,12 +30,12 @@ final class ExpenseViewModel: ObservableObject {
     func didTapPeriod() {
         let storedPeriod = preferences.selectedPeriod
         switch storedPeriod {
-        case .lastDay:
-            preferences.selectedPeriod = .lastWeek
-        case .lastWeek:
-            preferences.selectedPeriod = .lastMonth
-        case .lastMonth:
-            preferences.selectedPeriod = .lastDay
+        case .currentDay:
+            preferences.selectedPeriod = .currentWeek
+        case .currentWeek:
+            preferences.selectedPeriod = .currentMonth
+        case .currentMonth:
+            preferences.selectedPeriod = .currentDay
         }
         self.period = preferences.selectedPeriod.rawValue
     }

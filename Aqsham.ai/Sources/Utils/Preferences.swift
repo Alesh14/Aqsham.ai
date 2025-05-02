@@ -8,18 +8,19 @@ enum Currency: String {
 }
 
 enum Period: String {
-    case lastDay = "Last Day"
-    case lastWeek = "Last Week"
-    case lastMonth = "Last Month"
+    
+    case currentDay = "Last Day"
+    case currentWeek = "Last Week"
+    case currentMonth = "Last Month"
     
     var startDate: Date {
         switch self {
-        case .lastDay:
+        case .currentDay:
             return Calendar.current.startOfDay(for: Date())
-        case .lastWeek:
-            return Calendar.current.date(byAdding: .day, value: -7, to: Calendar.current.startOfDay(for: Date()))!
-        case .lastMonth:
-            return Calendar.current.date(byAdding: .month, value: -1, to: Calendar.current.startOfDay(for: Date()))!
+            case .currentWeek:
+                return Calendar.current.date(from: Calendar.current.dateComponents([.yearForWeekOfYear, .weekOfYear], from: Date()))!
+            case .currentMonth:
+                return Calendar.current.date(from: Calendar.current.dateComponents([.year, .month], from: Date()))!
         }
     }
 }
@@ -39,7 +40,7 @@ final class Preferences: ObservableObject {
         }
     }
     
-    @Published var selectedPeriod: Period = .lastDay {
+    @Published var selectedPeriod: Period {
         didSet {
             UserDefaults.standard.set(selectedPeriod.rawValue, forKey: Keys.selectedPeriod)
         }
@@ -50,6 +51,12 @@ final class Preferences: ObservableObject {
             currency = value
         } else {
             currency = .usd
+        }
+        
+        if let string = UserDefaults.standard.string(forKey: Keys.selectedPeriod), let value = Period(rawValue: string) {
+            selectedPeriod = value
+        } else {
+            selectedPeriod = .currentDay
         }
     }
 }
