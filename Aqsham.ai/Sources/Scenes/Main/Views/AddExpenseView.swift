@@ -147,7 +147,11 @@ struct AddExpenseView: View {
             return
         }
         
-        viewModel.addExpense(amount: amoutValue, date: selectedDate, categoryID: categoryModel.id, comment: comment)
+        if comment.isEmpty {
+            viewModel.addExpense(amount: amoutValue, date: selectedDate, categoryID: categoryModel.id, comment: nil)
+        } else {
+            viewModel.addExpense(amount: amoutValue, date: selectedDate, categoryID: categoryModel.id, comment: comment)
+        }
         viewModel.navigate(to: .dismiss)
     }
     
