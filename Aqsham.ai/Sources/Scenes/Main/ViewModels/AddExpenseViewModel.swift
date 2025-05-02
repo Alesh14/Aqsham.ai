@@ -14,7 +14,7 @@ final class AddExpenseViewModel {
         router.trigger(screen)
     }
     
-    func addExpense(amount: Double, date: Date, categoryID: UUID) {
-        expenseService.addExpense(amount: amount, date: date, categoryId: categoryID)
+    func addExpense(amount: Double, date: Date, categoryID: UUID, comment: String?) {
+        expenseService.addExpense(amount: amount, date: date, categoryId: categoryID, comment: comment)
     }
 }

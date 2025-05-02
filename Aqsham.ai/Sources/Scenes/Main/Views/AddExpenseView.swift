@@ -9,6 +9,7 @@ struct AddExpenseView: View {
     let viewModel: AddExpenseViewModel
     
     @State private var amount: String = ""
+    @State private var comment: String = ""
     @State private var categoryModel: CategoryModel?
     @State private var selectedDate = Date()
     
@@ -95,6 +96,20 @@ struct AddExpenseView: View {
                     .background(Color.clear)
                 }
                 .buttonStyle(.plain)
+                
+                Divider()
+                
+                HStack {
+                    Text("Comment")
+                        .font(.system(size: 17, weight: .regular))
+                    
+                    TextField("Optional", text: $comment)
+                        .font(.system(size: 17, weight: .regular))
+                        .multilineTextAlignment(.trailing)
+                        .keyboardType(.default)
+                }
+                .padding(.vertical, 11)
+                .padding(.horizontal, 16)
             }
             .background(Color.white)
             .cornerRadius(16)
@@ -132,7 +147,7 @@ struct AddExpenseView: View {
             return
         }
         
-        viewModel.addExpense(amount: amoutValue, date: selectedDate, categoryID: categoryModel.id)
+        viewModel.addExpense(amount: amoutValue, date: selectedDate, categoryID: categoryModel.id, comment: comment)
         viewModel.navigate(to: .dismiss)
     }
     

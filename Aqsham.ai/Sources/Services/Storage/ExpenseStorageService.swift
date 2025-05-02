@@ -8,7 +8,7 @@ protocol ExpenseStorageService {
     func eraseAll() -> Bool
     
     @discardableResult
-    func addExpense(amount: Double, date: Date, categoryId: UUID) -> Bool
+    func addExpense(amount: Double, date: Date, categoryId: UUID, comment: String?) -> Bool
     
     func fetchExpenses(from startDate: Date, to endDate: Date) -> [Expense]
 }
@@ -53,7 +53,7 @@ final class ExpenseStorageServiceImpl: ExpenseStorageService {
     
     @discardableResult
     func addExpense(
-        amount: Double, date: Date, categoryId: UUID
+        amount: Double, date: Date, categoryId: UUID, comment: String? = nil
     ) -> Bool {
         do {
             try provider.dataStack.perform { transaction in
@@ -61,6 +61,7 @@ final class ExpenseStorageServiceImpl: ExpenseStorageService {
                 expense.id = UUID()
                 expense.date = date
                 expense.amount = amount
+                expense.comment = comment
                 let category = try transaction.fetchOne(
                     From<Category>()
                         .where(\.id == categoryId)

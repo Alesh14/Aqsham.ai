@@ -26,7 +26,6 @@ final class AnalyticsViewModel: ObservableObject {
             if let category = expense.category {
                 categoryAmountDict[category, default: 0.0] += expense.amount
             }
-            print(expense.amount, expense.date, expense.category)
         }
         
         self.expenses = categoryAmountDict.compactMap { category, amount in
