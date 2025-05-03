@@ -10,7 +10,6 @@ final class SettingsCoordinator: Coordinator {
     
     func start() {
         let controller = SettingsController()
-        controller.view.backgroundColor = .blue
         navigationController.pushViewController(controller, animated: false)
     }
 }

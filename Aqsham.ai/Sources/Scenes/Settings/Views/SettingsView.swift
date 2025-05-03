@@ -2,6 +2,8 @@ import SwiftUI
 
 struct SettingsView: View {
     
+    var onTap: ((SettingsSectionsView.Section) -> Void)
+    
     var body: some View {
         ScrollView {
             VStack (spacing: 0) {
@@ -9,7 +11,7 @@ struct SettingsView: View {
                 
                 Spacer().frame(height: 20)
                 
-                SettingsSectionsView()
+                SettingsSectionsView(onTap: onTap)
             }
         }
     }
@@ -17,7 +19,7 @@ struct SettingsView: View {
 
 struct SettingsSectionsView: View {
     
-    private enum Section {
+    enum Section {
         case editCategories
         case notifications
         case currency
@@ -57,30 +59,32 @@ struct SettingsSectionsView: View {
     
     @ObservedObject private var preferences = Preferences.shared
     
+    var onTap: ((Section) -> Void)
+    
     var body: some View {
         VStack (spacing: 16) {
             button(for: .editCategories) {
-                
+                onTap(.editCategories)
             }
             .cornerRadius(16)
             
             VStack (spacing: 0) {
                 button(for: .notifications) {
-                    
+                    onTap(.notifications)
                 }
                 Divider()
                 button(for: .currency) {
-                    
+                    onTap(.currency)
                 }
                 Divider()
                 button(for: .language) {
-                    
+                    onTap(.language)
                 }
             }
             .cornerRadius(16)
             
             button(for: .help) {
-                
+                onTap(.help)
             }
             .cornerRadius(16)
         }

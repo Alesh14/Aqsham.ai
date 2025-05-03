@@ -13,7 +13,20 @@ final class SettingsController: UIViewController {
     }
     
     private func configUI() {
-        let vc = UIHostingController(rootView: SettingsView())
+        let vc = UIHostingController(rootView: SettingsView(onTap: { section in
+            switch section {
+            case .editCategories:
+                break
+            case .currency:
+                break
+            case .language:
+                break
+            case .notifications:
+                break
+            case .help:
+                break
+            }
+        }))
         vc.insertBackgroundColor()
         addChild(vc)
         vc.didMove(toParent: self)
