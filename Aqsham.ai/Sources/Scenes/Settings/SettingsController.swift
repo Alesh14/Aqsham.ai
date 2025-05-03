@@ -40,6 +40,7 @@ final class SettingsController: UIViewController {
         let vc = UIHostingController(rootView: SettingsView(onTap: { [weak self] section in
             self?.viewModel.navigate(to: section)
         }))
+        
         vc.insertBackgroundColor()
         addChild(vc)
         vc.didMove(toParent: self)
