@@ -93,6 +93,8 @@ struct ExpenseView: View {
                 .kerning(-0.23)
                 .font(.system(size: 15, weight: .semibold))
                 .foregroundColor(.blue)
+            
+            Spacer()
         }
         .frame(maxWidth: .infinity)
     }

@@ -27,7 +27,7 @@ struct ExpenseDetailsView: View {
                         Spacer()
                         
                         Text("\(Preferences.shared.selectedPeriod.startDate.formatted) - \(Date().formatted)")
-                            .font(.system(size: 18, weight: .semibold))
+                            .font(.system(size: 13, weight: .semibold))
                             .foregroundColor(Layout.secondaryColor)
                             .padding(.trailing, 30)
                     }
@@ -62,7 +62,7 @@ struct ExpenseDetailsView: View {
                                 if let comment = expense.comment {
                                     VStack (alignment: .leading) {
                                         Text("Comment")
-                                            .font(.system(size: 18, weight: .semibold))
+                                            .font(.system(size: 13, weight: .semibold))
                                             .foregroundColor(Layout.secondaryColor)
                                     
                                         ZStack (alignment: .leading) {

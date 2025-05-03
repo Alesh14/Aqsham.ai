@@ -112,7 +112,7 @@ struct SettingsSectionsView: View {
                             .foregroundColor(Color(uiColor: .systemGray))
                     }
                     if section == .language {
-                        Text(preferences.language.rawValue)
+                        Text(preferences.language.subtitle)
                             .foregroundColor(Color(uiColor: .systemGray))
                     }
                     

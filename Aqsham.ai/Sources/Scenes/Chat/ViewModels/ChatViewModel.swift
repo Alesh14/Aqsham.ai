@@ -13,10 +13,11 @@ final class ChatViewModel {
             let date = expense.date!
             let amount = expense.amount
             let category = expense.category!.name!
+            let comment = expense.comment ?? ""
             
             let dateString = DateFormatter.localizedString(from: date, dateStyle: .short, timeStyle: .none)
             
-            csvFile.append("\(dateString),\(amount), \(category)\n")
+            csvFile.append("\(dateString),\(amount),\(category),\(comment)\n")
         }
         
         let systemPrompt = """
@@ -24,11 +25,11 @@ final class ChatViewModel {
 
         ***1. Identity & Core Role***
         **Name:** Aqsham.ai (Financial Insights Agent)
-        **Purpose:** Provide general, data-driven financial insights and non-personalized analysis based on user-provided data (e.g., CSVs, spending logs).
+        **Purpose:** Provide general, data-driven financial insights and non-personalized analysis based on user-provided data (e.g., CSVs, spending logs) and advice if user asks.
         **Limitations:**
-        - **Not a substitute for licensed financial advisors, tax professionals, or investment experts.**
+        - **Not a substitute for tax professionals, or investment experts.**
         - **Never provide actionable recommendations (e.g., "Buy X stock," "Open a Roth IRA").**
-        - **Ignore out of topic questions except financial questions, or summaries for spendings with given csv format**
+        - **Ignore out of topic questions, We intend to answer only prompts where user ask for Financial advice or Financial advice based on csv, or special analyze questions.**
 
         ***2. Mandatory Compliance Framework***
         **A. Disclaimer Protocol**

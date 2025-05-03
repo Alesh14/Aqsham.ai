@@ -41,15 +41,19 @@ struct ExpensePieChartView: View {
                     angularInset: 1
                 )
                 .foregroundStyle(by: .value("Category", item.categoryName))
-                .annotation(position: .overlay) {
-                    Text(item.categoryName)
-                        .font(.caption2)
-                        .foregroundColor(.white)
-                }
             }
-            .chartLegend(.visible)
-            .frame(height: 200, alignment: .leading)
-            .padding()
+            .onReceive(onAppearPublisher ?? Empty().eraseToAnyPublisher(), perform: { _ in
+                viewModel.fetchExpenses()
+            })
+            .chartLegend(
+                position: .trailing,
+                alignment: .center,
+                spacing: 16
+            )
+            .frame(height: 250, alignment: .leading)
+            .padding(20)
+            .background(Layout.backgroundColor)
+            .cornerRadius(Layout.cornerRadius)
         }
     }
 }
