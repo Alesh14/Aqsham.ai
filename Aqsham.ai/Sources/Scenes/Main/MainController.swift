@@ -6,6 +6,8 @@ final class MainController: UIViewController {
     
     private let viewModel: MainViewModel
     
+    private let titleLabel = UILabel()
+    
     init(viewModel: MainViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -23,6 +25,7 @@ final class MainController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         viewModel.onAppearSubject.send()
+        titleLabel.text = AppLocalizedString("My Expenses")
     }
     
     private func didTapHistory() {}
@@ -39,11 +42,10 @@ final class MainController: UIViewController {
     }
     
     private func configUI() {
-        let label = UILabel()
-        label.text = AppLocalizedString("My Expenses")
-        label.font = .systemFont(ofSize: 22, weight: .bold)
-        label.addCharacterSpacing(kernValue: -0.26)
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: label)
+        titleLabel.text = AppLocalizedString("My Expenses")
+        titleLabel.font = .systemFont(ofSize: 22, weight: .bold)
+        titleLabel.addCharacterSpacing(kernValue: -0.26)
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: titleLabel)
         self.insertBackgroundColor()
         
         let hostView = MainView(

@@ -18,7 +18,7 @@ final class ExpenseViewModel: ObservableObject {
     private var expenses: [Expense] = []
     
     init() {
-        self.period = preferences.selectedPeriod.rawValue
+        self.period = AppLocalizedString(preferences.selectedPeriod.rawValue)
         self.currency = preferences.currency
         self.calculateTotalExpenseForSelectedPeriod()
     }
@@ -37,7 +37,7 @@ final class ExpenseViewModel: ObservableObject {
         case .currentMonth:
             preferences.selectedPeriod = .currentDay
         }
-        self.period = preferences.selectedPeriod.rawValue
+        self.period = AppLocalizedString(preferences.selectedPeriod.rawValue)
     }
     
     private func calculateTotalExpenseForSelectedPeriod() {

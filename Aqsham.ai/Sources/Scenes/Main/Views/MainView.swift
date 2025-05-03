@@ -30,14 +30,14 @@ struct MainView: View {
                 }
                 .padding(.bottom, 16)
                 
-                buildSectionTitle("Analytics".uppercased())
+                buildSectionTitle(AppLocalizedString("Analytics").uppercased())
                     .padding(.leading, 16)
                     .padding(.bottom, 6)
                 
                 AnalyticsView(onTapAddExpense: onTapAddExpense, onAppearPublisher: onAppearPublisher, onTapOpenExpenseDetails: onTapOpenExpenseDetails)
                     .padding(.bottom, 16)
                 
-                buildSectionTitle("Visualization".uppercased())
+                buildSectionTitle(AppLocalizedString("Visualization").uppercased())
                     .padding(.leading, 16)
                     .padding(.bottom, 6)
                 
