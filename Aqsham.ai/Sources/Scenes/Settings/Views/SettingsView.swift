@@ -55,6 +55,8 @@ struct SettingsSectionsView: View {
         }
     }
     
+    @ObservedObject private var preferences = Preferences.shared
+    
     var body: some View {
         VStack (spacing: 16) {
             button(for: .editCategories) {
@@ -95,12 +97,26 @@ struct SettingsSectionsView: View {
                         .foregroundColor(section.bgColor)
                     Text(section.title)
                         .foregroundColor(section == .editCategories ? .blue : .black)
+                    
                     Spacer()
                         .contentShape(Rectangle())
+                    
+                    if section == .currency {
+                        Text(preferences.currency.rawValue)
+                            .foregroundColor(Color(uiColor: .systemGray))
+                    }
+                    if section == .language {
+                        Text(preferences.language.rawValue)
+                            .foregroundColor(Color(uiColor: .systemGray))
+                    }
+                    
+                    Image(systemName: "chevron.right")
+                        .font(.system(size: 17))
+                        .foregroundColor(Color(hex: "#3C3C43").opacity(0.3))
                 }
                 .contentShape(Rectangle())
                 .padding(.horizontal, 16)
-                .padding(.vertical, 10)
+                .padding(.vertical, 12)
             } onTapCompletion: {
                 onTap()
             }
