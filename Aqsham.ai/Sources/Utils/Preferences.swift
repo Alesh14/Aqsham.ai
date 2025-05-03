@@ -100,7 +100,14 @@ final class Preferences: ObservableObject {
         if let string = UserDefaults.standard.string(forKey: Keys.language), let value = Lanugage(rawValue: string) {
             language = value
         } else {
-            language = .english
+            let localeId = Locale.preferredLanguages.first ?? "en"
+            if localeId.hasPrefix("ru") {
+                language = .russian
+            } else if localeId.hasPrefix("kk") {
+                language = .kazakh
+            } else {
+                language = .english
+            }
         }
     }
 }
