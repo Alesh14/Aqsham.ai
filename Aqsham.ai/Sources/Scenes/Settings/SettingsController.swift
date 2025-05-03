@@ -1,7 +1,31 @@
 import UIKit
 import SwiftUI
 
+final class SettingsViewModel {
+    
+    unowned let router: SettingsScreenRoute
+    
+    init(router: SettingsScreenRoute) {
+        self.router = router
+    }
+    
+    func navigate(to section: SettingsSectionsView.Section) {
+        router.trigger(section)
+    }
+}
+
 final class SettingsController: UIViewController {
+    
+    let viewModel: SettingsViewModel
+    
+    init(viewModel: SettingsViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -13,19 +37,8 @@ final class SettingsController: UIViewController {
     }
     
     private func configUI() {
-        let vc = UIHostingController(rootView: SettingsView(onTap: { section in
-            switch section {
-            case .editCategories:
-                break
-            case .currency:
-                break
-            case .language:
-                break
-            case .notifications:
-                break
-            case .help:
-                break
-            }
+        let vc = UIHostingController(rootView: SettingsView(onTap: { [weak self] section in
+            self?.viewModel.navigate(to: section)
         }))
         vc.insertBackgroundColor()
         addChild(vc)
