@@ -98,7 +98,9 @@ struct SettingsSectionsView: View {
             ScaleableButtonView {
                 HStack (spacing: 16) {
                     Image(systemName: section.iconName)
+                        .frame(width: 20, height: 16)
                         .foregroundColor(section.bgColor)
+                    
                     Text(section.title)
                         .foregroundColor(section == .editCategories ? .blue : .black)
                     

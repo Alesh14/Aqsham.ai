@@ -30,10 +30,26 @@ enum Gender: String {
     case female = "Female"
 }
 
-enum Lanugage: String {
-    case kazakh
-    case english
-    case russian
+enum Lanugage: String, CaseIterable {
+    case kazakh  = "kk"
+    case russian = "ru"
+    case english = "en"
+    
+    var title: String {
+        switch self {
+        case .kazakh:  return "Kazakh"
+        case .russian: return "Russian"
+        case .english: return "English"
+        }
+    }
+    
+    var subtitle: String {
+        switch self {
+        case .kazakh:  return "Қазақша"
+        case .russian: return "Русский"
+        case .english: return "English"
+        }
+    }
 }
 
 final class Preferences: ObservableObject {

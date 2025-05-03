@@ -2,15 +2,38 @@ import SwiftUI
 
 struct LanguagePickView: View {
     
+    @State private var selectedLanguage: Lanugage = .english
+
     var body: some View {
-        VStack (spacing: 0) {
-            button(for: .kazakh)
-            button(for: .russian)
-            button(for: .english)
+        NavigationView {
+            List {
+                Section {
+                    ForEach(Lanugage.allCases, id: \.self) { lang in
+                        HStack {
+                            VStack(alignment: .leading, spacing: 2) {
+                                Text(lang.title)
+                                    .foregroundColor(.primary)
+                                Text(lang.subtitle)
+                                    .font(.subheadline)
+                                    .foregroundColor(.secondary)
+                            }
+                            Spacer()
+                            if selectedLanguage == lang {
+                                Image(systemName: "checkmark")
+                                    .foregroundColor(.accentColor)
+                            }
+                        }
+                        .contentShape(Rectangle())
+                        .onTapGesture {
+                            selectedLanguage = lang
+                        }
+                    }
+                }
+            }
+            .padding(.top, -25)
+            .listStyle(.insetGrouped)
+            .navigationTitle("Language")
+            .navigationBarTitleDisplayMode(.inline)
         }
-    }
-    
-    private func button(for language: Lanugage) -> some View {
-        VStack {}
     }
 }

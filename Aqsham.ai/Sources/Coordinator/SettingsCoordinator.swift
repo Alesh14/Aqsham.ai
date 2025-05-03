@@ -1,4 +1,5 @@
 import UIKit
+import SwiftUI
 
 protocol SettingsScreenRoute: AnyObject {
     func trigger(_ route: SettingsSectionsView.Section)
@@ -27,8 +28,10 @@ extension SettingsCoordinator: SettingsScreenRoute {
             break
         case .currency:
             break
-        case .language:
-            break
+        case .language: 
+            let vc = UIHostingController(rootView: LanguagePickView())
+            vc.insertBackgroundColor()
+            navigationController.present(vc, animated: true)
         case .notifications:
             break
         case .help:
