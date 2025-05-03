@@ -1,0 +1,14 @@
+/* ru.lproj/Localizable.strings */
+/* Russian */
+"Add Expense"    = "Добавить расход";
+"Talk to AI"     = "Поговорить с ИИ";
+"History"        = "История";
+"Analytics"      = "Аналитика";
+"Visualization"  = "Визуализация";
+"My Expenses"    = "Мои расходы";
+"Last Month"     = "Последний месяц";
+"Last Day"       = "Последний день";
+"Last Week"      = "Последняя неделя";
+"Total Expense"  = "Общие расходы";
+"Home"           = "Главная";
+"Settings"       = "Настройки";

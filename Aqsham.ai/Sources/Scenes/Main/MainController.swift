@@ -40,7 +40,7 @@ final class MainController: UIViewController {
     
     private func configUI() {
         let label = UILabel()
-        label.text = "My Expenses"
+        label.text = AppLocalizedString("My Expenses")
         label.font = .systemFont(ofSize: 22, weight: .bold)
         label.addCharacterSpacing(kernValue: -0.26)
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: label)

@@ -20,7 +20,7 @@ struct ExpenseView: View {
     var body: some View {
         VStack (alignment: .leading, spacing: 0) {
             HStack {
-                Text("Total Expense")
+                Text(AppLocalizedString("Total Expense"))
                     .kerning(-0.08)
                     .font(.system(size: 13, weight: .medium))
                     .foregroundColor(Layout.secondaryTextColor)
@@ -46,19 +46,19 @@ struct ExpenseView: View {
             
             HStack (spacing: 0) {
                 ScaleableButtonView {
-                    buildButton(iconName: "plus", title: "Add expense")
+                    buildButton(iconName: "plus", title: AppLocalizedString("Add Expense"))
                 } onTapCompletion: {
                     onTapAddExpense?()
                 }
                 
                 ScaleableButtonView {
-                    buildButton(iconName: "message.fill", title: "Talk to AI")
+                    buildButton(iconName: "message.fill", title: AppLocalizedString("Talk to AI"))
                 } onTapCompletion: {
                     onTapTalkToAgent?()
                 }
                 
                 ScaleableButtonView {
-                    buildButton(iconName: "clock.fill", title: "History")
+                    buildButton(iconName: "clock.fill", title: AppLocalizedString("History"))
                 } onTapCompletion: {
                     onTapHistory?()
                 }

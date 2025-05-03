@@ -30,28 +30,6 @@ enum Gender: String {
     case female = "Female"
 }
 
-enum Lanugage: String, CaseIterable {
-    case kazakh  = "kk"
-    case russian = "ru"
-    case english = "en"
-    
-    var title: String {
-        switch self {
-        case .kazakh:  return "Kazakh"
-        case .russian: return "Russian"
-        case .english: return "English"
-        }
-    }
-    
-    var subtitle: String {
-        switch self {
-        case .kazakh:  return "Қазақша"
-        case .russian: return "Русский"
-        case .english: return "English"
-        }
-    }
-}
-
 final class Preferences: ObservableObject {
     
     private enum Keys {
@@ -60,7 +38,6 @@ final class Preferences: ObservableObject {
         static let userName = "userName"
         static let gender = "gender"
         static let age = "age"
-        static let language = "language"
     }
     
     static let shared = Preferences()
@@ -83,7 +60,12 @@ final class Preferences: ObservableObject {
         didSet { UserDefaults.standard.set(age, forKey: Keys.age) }
     }
     @Published var language: Lanugage {
-        didSet { UserDefaults.standard.set(age, forKey: Keys.language) }
+        didSet {
+            guard language != oldValue else {
+                return
+            }
+            LanguageManager.shared.updateLanguage(language)
+        }
     }
     
     private init() {
@@ -113,17 +95,6 @@ final class Preferences: ObservableObject {
             gender = value
         }
         
-        if let string = UserDefaults.standard.string(forKey: Keys.language), let value = Lanugage(rawValue: string) {
-            language = value
-        } else {
-            let localeId = Locale.preferredLanguages.first ?? "en"
-            if localeId.hasPrefix("ru") {
-                language = .russian
-            } else if localeId.hasPrefix("kk") {
-                language = .kazakh
-            } else {
-                language = .english
-            }
-        }
+        self.language = LanguageManager.shared.language
     }
 }

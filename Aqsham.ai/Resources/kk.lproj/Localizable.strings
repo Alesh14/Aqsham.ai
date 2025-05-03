@@ -1,0 +1,14 @@
+/* kk.lproj/Localizable.strings */
+/* Kazakh */
+"Add Expense"    = "Шығын қосу";
+"Talk to AI"     = "ЖИ сөйлесу";
+"History"        = "Тарих";
+"Analytics"      = "Аналитика";
+"Visualization"  = "Көрнекілеу";
+"My Expenses"    = "Менің шығындарым";
+"Last Month"     = "Өткен ай";
+"Last Day"       = "Өткен күн";
+"Last Week"      = "Өткен апта";
+"Total Expense"  = "Жалпы шығындар";
+"Home"           = "Басты бет";
+"Settings"       = "Баптаулар";

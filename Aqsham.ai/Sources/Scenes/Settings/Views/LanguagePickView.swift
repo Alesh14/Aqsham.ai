@@ -2,7 +2,15 @@ import SwiftUI
 
 struct LanguagePickView: View {
     
-    @State private var selectedLanguage: Lanugage = .english
+    @State private var selectedLanguage: Lanugage {
+        didSet {
+            Preferences.shared.language = selectedLanguage
+        }
+    }
+    
+    init() {
+        self.selectedLanguage = Preferences.shared.language
+    }
 
     var body: some View {
         NavigationView {

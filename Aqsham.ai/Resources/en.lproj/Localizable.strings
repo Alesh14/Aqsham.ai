@@ -1,0 +1,14 @@
+/* en.lproj/Localizable.strings */
+/* English (Base) */
+"Add Expense"    = "Add Expense";
+"Talk to AI"     = "Talk to AI";
+"History"        = "History";
+"Analytics"      = "Analytics";
+"Visualization"  = "Visualization";
+"My Expenses"    = "My Expenses";
+"Last Month"     = "Last Month";
+"Last Day"       = "Last Day";
+"Last Week"      = "Last Week";
+"Total Expense"  = "Total Expense";
+"Home"           = "Home";
+"Settings"       = "Settings";
