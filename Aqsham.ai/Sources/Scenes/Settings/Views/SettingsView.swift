@@ -28,11 +28,11 @@ struct SettingsSectionsView: View {
         
         var title: String {
             switch self {
-            case .editCategories: return "Edit Categories"
-            case .notifications: return "Notifications"
-            case .currency: return "Currency"
-            case .language: return "Language"
-            case .help: return "Help"
+            case .editCategories: return AppLocalizedString("Edit Categories")
+            case .notifications: return AppLocalizedString("Notifications")
+            case .currency: return AppLocalizedString("Currency")
+            case .language: return AppLocalizedString("Language")
+            case .help: return AppLocalizedString("Help")
             }
         }
         

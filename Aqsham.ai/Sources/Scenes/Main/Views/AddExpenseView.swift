@@ -29,7 +29,7 @@ struct AddExpenseView: View {
             
             VStack (spacing: 0) {
                 HStack {
-                    Text("Amount")
+                    Text(AppLocalizedString("Amount"))
                         .font(.system(size: 17, weight: .regular))
                     
                     if !amountMessage.isEmpty {
@@ -68,7 +68,7 @@ struct AddExpenseView: View {
                     didTapCategory()
                 } label: {
                     HStack {
-                        Text("Category")
+                        Text(AppLocalizedString("Category"))
                             .font(.system(size: 17, weight: .regular))
                         
                         Spacer()
@@ -100,10 +100,10 @@ struct AddExpenseView: View {
                 Divider()
                 
                 HStack {
-                    Text("Comment")
+                    Text(AppLocalizedString("Comment"))
                         .font(.system(size: 17, weight: .regular))
                     
-                    TextField("Optional", text: $comment)
+                    TextField(AppLocalizedString("Optional"), text: $comment)
                         .font(.system(size: 17, weight: .regular))
                         .multilineTextAlignment(.trailing)
                         .keyboardType(.default)
@@ -118,13 +118,13 @@ struct AddExpenseView: View {
         }
         .padding(.horizontal, 22)
         .insertBackgroundColor()
-        .navigationTitle("Add Expense")
+        .navigationTitle(AppLocalizedString("Add Expense"))
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button {
                     didTapAdd()
                 } label: {
-                    Text("Add")
+                    Text(AppLocalizedString("Add"))
                         .foregroundColor(.blue)
                         .font(.system(size: 17, weight: .semibold))
                 }
@@ -135,7 +135,7 @@ struct AddExpenseView: View {
                 Button {
                     viewModel.navigate(to: .dismiss)
                 } label: {
-                    Text("Back")
+                    Text(AppLocalizedString("Back"))
                         .foregroundColor(.blue)
                         .font(.system(size: 17, weight: .semibold))
                 }
@@ -147,12 +147,12 @@ struct AddExpenseView: View {
         hideKeyboardIfNeeded()
 
         guard let categoryModel else {
-            categoryMessage = "Select category"
+            categoryMessage = AppLocalizedString("Select category")
             return
         }
         
         guard let amoutValue = Double(amount), amoutValue > 0 else {
-            amountMessage = "Enter valid amount"
+            amountMessage = AppLocalizedString("Enter valid amount")
             return
         }
         

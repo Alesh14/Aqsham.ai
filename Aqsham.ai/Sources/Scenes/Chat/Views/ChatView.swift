@@ -42,7 +42,7 @@ struct ChatView: View {
                         .resizable()
                         .scaledToFit()
                         .frame(width: 200, height: 200)
-                    Text("Ask Me Something")
+                    Text(AppLocalizedString("Ask Me Something"))
                         .font(.system(size: 17, weight: .semibold))
                         .kerning(-0.43)
                     
@@ -58,7 +58,7 @@ struct ChatView: View {
         }
         .ignoresSafeArea(.container, edges: .bottom)
         .insertBackgroundColor()
-        .navigationTitle("Chat with AI")
+        .navigationTitle(AppLocalizedString("Chat with AI"))
         .onTapGesture {
             hideKeyboard()
         }
@@ -149,7 +149,7 @@ struct ChatView: View {
     private func parseText(_ input: String) -> some View {
         if input == "__typing__" {
             return AnyView(HStack(spacing: 4) {
-                Text("Assistant is typing")
+                Text(AppLocalizedString("Assistant is typing"))
                     .font(.system(size: 15))
                     .italic()
                     .foregroundColor(.gray)
@@ -191,9 +191,9 @@ struct ChatView: View {
             if messages.isEmpty {
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 8) {
-                        suggestionButton(title: "How to be financially\neducated?")
-                        suggestionButton(title: "My expenditure for\nlast month")
-                        suggestionButton(title: "10 tips to be\nfinancially educated")
+                        suggestionButton(title: AppLocalizedString("Suggested-Question-1"))
+                        suggestionButton(title: AppLocalizedString("Suggested-Question-2"))
+                        suggestionButton(title: AppLocalizedString("Suggested-Question-3"))
                         Spacer()
                     }
                 }
@@ -208,7 +208,7 @@ struct ChatView: View {
                 
                 VStack(spacing: 6) {
                     HStack(spacing: 0) {
-                        TextField("Ask anything", text: $userInput, onEditingChanged: { isEditing in
+                        TextField(AppLocalizedString("Ask anything"), text: $userInput, onEditingChanged: { isEditing in
                             isKeyboardOpen = isEditing
                         })
                         .autocorrectionDisabled()

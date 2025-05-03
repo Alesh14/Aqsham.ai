@@ -14,7 +14,7 @@ struct ExpenseDetailsView: View {
                 VStack (spacing: 12) {
                     HStack {
                         VStack (alignment: .leading, spacing: 0) {
-                            Text("Total")
+                            Text(AppLocalizedString("Total"))
                                 .font(.system(size: 16, weight: .semibold))
                                 .foregroundColor(.black)
                             
@@ -36,7 +36,7 @@ struct ExpenseDetailsView: View {
                     
                     ForEach(item.expenses, id: \.self) { (expense: Expense) in
                         VStack (alignment: .leading, spacing: 0) {
-                            Text(expense.date?.formatted ?? "some day")
+                            Text(expense.date?.formatted ?? "")
                                 .font(.system(size: 16, weight: .semibold))
                                 .foregroundColor(.black)
                                 .padding(.horizontal, 14)
@@ -61,7 +61,7 @@ struct ExpenseDetailsView: View {
                                 
                                 if let comment = expense.comment {
                                     VStack (alignment: .leading) {
-                                        Text("Comment")
+                                        Text(AppLocalizedString("Comment"))
                                             .font(.system(size: 13, weight: .semibold))
                                             .foregroundColor(Layout.secondaryColor)
                                     
@@ -78,7 +78,7 @@ struct ExpenseDetailsView: View {
                                         }
                                     }
                                 } else {
-                                    Text("No comment")
+                                    Text(AppLocalizedString("No Comment"))
                                         .font(.system(size: 18, weight: .semibold))
                                         .foregroundColor(Layout.secondaryColor)
                                 }
