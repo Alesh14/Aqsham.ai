@@ -7,7 +7,7 @@ struct AddNewCategoryView: View {
     
     @State private var selectedColor: UIColor = .systemBlue
     
-    @State private var iconText: String = "Choose"
+    @State private var iconText: String = AppLocalizedString("Choose")
     @State private var iconString: String?
     
     @State private var isPickerPresented: Bool = false
@@ -18,7 +18,7 @@ struct AddNewCategoryView: View {
         VStack {
             VStack (spacing: 0) {
                 HStack {
-                    Text("Title")
+                    Text(AppLocalizedString("Title"))
                         .font(.system(size: 17, weight: .regular))
                     
                     textField()
@@ -30,7 +30,7 @@ struct AddNewCategoryView: View {
                     .padding(.leading, 16)
                 
                 HStack {
-                    Text("Color")
+                    Text(AppLocalizedString("Color"))
                         .font(.system(size: 17, weight: .regular))
                     
                     Spacer()
@@ -44,7 +44,7 @@ struct AddNewCategoryView: View {
                     .padding(.leading, 16)
                 
                 HStack {
-                    Text("Icon")
+                    Text(AppLocalizedString("Icon"))
                         .font(.system(size: 17, weight: .regular))
                     
                     Spacer()
@@ -74,7 +74,7 @@ struct AddNewCategoryView: View {
                 CategoryIconPicker(icons: viewModel.spendingCategoryIcons) { icon in
                     self.iconString = icon
                     self.isPickerPresented = false
-                    self.iconText = "Edit"
+                    self.iconText = AppLocalizedString("Edit")
                 }
             }
             
@@ -86,7 +86,7 @@ struct AddNewCategoryView: View {
                 Button {
                     didTapAddNewCategory()
                 } label: {
-                    Text("Add category")
+                    Text(AppLocalizedString("Add category"))
                         .foregroundColor(.blue)
                         .font(.system(size: 17, weight: .medium))
                 }
@@ -98,7 +98,7 @@ struct AddNewCategoryView: View {
     
     private func didTapAddNewCategory() {
         if viewModel.checkCategoryExists(title: title) {
-            titleMessage = "Category already exists"
+            titleMessage = AppLocalizedString("Category already exists")
             title = ""
             return
         }
@@ -119,7 +119,7 @@ struct AddNewCategoryView: View {
             Spacer()
         }
         
-        TextField("Ex. Food", text: $title, onEditingChanged: { isEditing in
+        TextField(AppLocalizedString("Ex. Food"), text: $title, onEditingChanged: { isEditing in
             if isEditing {
                 titleMessage = ""
             }

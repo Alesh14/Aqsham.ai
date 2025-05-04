@@ -38,7 +38,7 @@ struct CategoryView: View {
                         didTapAddNewCategory()
                     } label: {
                         HStack {
-                            Text("Add New Category")
+                            Text(AppLocalizedString("Add new Category"))
                                 .font(.system(size: 17, weight: .regular))
                             
                             Spacer()

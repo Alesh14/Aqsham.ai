@@ -20,7 +20,7 @@
 "Last Month"              = "Последний месяц";
 "My Expenses"             = "Мои расходы";
 "No comment"              = "Без комментариев";
-"Optionals"               = "Необязательные";
+"Optional"               = "Необязательные";
 "Select category"         = "Выберите категорию";
 "Settings"                = "Настройки";
 "Talk to AI"              = "Поговорить с ИИ";
@@ -45,3 +45,14 @@
 "currency.rub" = "Российский рубль";
 "Reminder"                                 = "Напоминание";
 "Do not forget to track your spendings today!" = "Не забудьте учесть свои расходы сегодня!";
+"Add category"                  = "Добавить категорию";
+"Edit"                          = "Редактировать";
+"Category already exists"       = "Категория уже существует";
+"Ex. Food"                      = "Напр. Еда";
+"Icon"                          = "Иконка";
+"Color"                         = "Цвет";
+"Title"                         = "Название";
+"Choose"                        = "Выбрать";
+"On"  = "Включено";
+"Off" = "Отключено";
+"Add new category" = "Добавить новую категорию";

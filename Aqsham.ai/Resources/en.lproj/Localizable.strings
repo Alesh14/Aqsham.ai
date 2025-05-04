@@ -20,7 +20,7 @@
 "Last Month"                          = "Last Month";
 "My Expenses"                         = "My Expenses";
 "No comment"                          = "No comment";
-"Optionals"                           = "Optionals";
+"Optional"                           = "Optional";
 "Select category"                     = "Select category";
 "Settings"                            = "Settings";
 "Talk to AI"                          = "Talk to AI";
@@ -46,3 +46,14 @@
 "currency.rub" = "Russian Ruble";
 "Reminder"                              = "Reminder";
 "Do not forget to track your spendings today!" = "Do not forget to track your spendings today!";
+"Add category"                  = "Add category";
+"Edit"                          = "Edit";
+"Category already exists"       = "Category already exists";
+"Ex. Food"                      = "Ex. Food";
+"Icon"                          = "Icon";
+"Color"                         = "Color";
+"Title"                         = "Title";
+"Choose"                        = "Choose";
+"On"  = "On";
+"Off" = "Off";
+"Add new category" = "Add new category";

@@ -8,7 +8,12 @@ struct DatePickerView: View {
     @State private var selectedMonth: Int
     @State private var selectedYear: Int
 
-    private let months = Calendar.current.monthSymbols
+    private var months: [String] {
+        var cal = Calendar.current
+        cal.locale = Locale(identifier: LanguageManager.shared.language.rawValue)
+        return cal.monthSymbols
+    }
+    
     private let years = Array(2000...Calendar.current.component(.year, from: Date()))
     
     private var daysInMonth: [Int] {

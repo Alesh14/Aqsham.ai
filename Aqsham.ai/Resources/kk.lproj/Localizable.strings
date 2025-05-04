@@ -20,7 +20,7 @@
 "Last Month"              = "Өткен ай";
 "My Expenses"             = "Менің шығындарым";
 "No comment"              = "Түсініктеме жоқ";
-"Optionals"               = "Міндетті емес";
+"Optional"               = "Міндетті емес";
 "Select category"         = "Санатты таңдаңыз";
 "Settings"                = "Баптаулар";
 "Talk to AI"              = "ЖИ-мен сөйлесу";
@@ -45,3 +45,14 @@
 "currency.rub" = "Ресей рублі";
 "Reminder"                                 = "Еске салғыш";
 "Do not forget to track your spendings today!" = "Бүгінгі шығындарыңызды жазуды ұмытпаңыз!";
+"Add category"                  = "Санатты қосу";
+"Edit"                          = "Өңдеу";
+"Category already exists"       = "Санат бұрыннан бар";
+"Ex. Food"                      = "Мыс. Тағам";
+"Icon"                          = "Иконка";
+"Color"                         = "Түс";
+"Title"                         = "Атауы";
+"Choose"                        = "Таңдау";
+"On"  = "Қосулы";
+"Off" = "Өшірулі";
+"Add new category" = "Жаңа санат қосу";

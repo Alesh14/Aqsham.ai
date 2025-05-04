@@ -117,7 +117,7 @@ struct SettingsSectionsView: View {
                     }
                     
                     if section == .notifications {
-                        Text(preferences.notificationEnabled ? "On" : "Off")
+                        Text(preferences.notificationEnabled ? AppLocalizedString("On") : AppLocalizedString("Off"))
                             .foregroundColor(Color(uiColor: .systemGray))
                     } else {
                         Image(systemName: "chevron.right")
