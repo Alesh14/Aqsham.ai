@@ -104,6 +104,7 @@ struct ExpenseDetailsView: View {
 extension Date {
     var formatted: String {
         let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: LanguageManager.shared.language.rawValue)
         formatter.dateFormat = "d MMMM yyyy"
         return formatter.string(from: self)
     }

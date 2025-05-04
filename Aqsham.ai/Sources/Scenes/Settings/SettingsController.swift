@@ -32,6 +32,10 @@ final class SettingsController: UIViewController {
         configUI()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        navigationItem.rightBarButtonItem?.title = AppLocalizedString("Edit")
+    }
+    
     @objc private func didTapEdit() {
         
     }
@@ -49,6 +53,11 @@ final class SettingsController: UIViewController {
             $0.edges.equalToSuperview()
         }
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(didTapEdit))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            title: AppLocalizedString("Edit"),
+            style: .plain,
+            target: self,
+            action: #selector(didTapEdit)
+        )
     }
 }
