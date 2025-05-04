@@ -22,7 +22,7 @@
 "No comment"                          = "No comment";
 "Optional"                           = "Optional";
 "Select category"                     = "Select category";
-"Settings"                            = "Settings";
+"Settings"                             = "Settings";
 "Talk to AI"                          = "Talk to AI";
 "There's not enough data to show."    = "There's not enough data to show.";
 "Total"                               = "Total";
@@ -57,3 +57,10 @@
 "On"  = "On";
 "Off" = "Off";
 "Add new category" = "Add new category";
+"Gender" = "Gender";
+"Profile" = "Profile";
+"Age" = "Age";
+"Cancel" = "Cancel";
+"Male"   = "Male";
+"Female" = "Female";
+"Save" = "Save";

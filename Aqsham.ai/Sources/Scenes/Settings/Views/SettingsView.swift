@@ -149,7 +149,7 @@ struct ProfileView: View {
     
     private var genderText: String {
         if let gender = preferences.gender {
-            return gender.rawValue
+            return AppLocalizedString(gender.rawValue)
         }
         return AppLocalizedString("Gender didn't set")
     }

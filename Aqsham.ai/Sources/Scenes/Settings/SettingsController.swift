@@ -37,7 +37,9 @@ final class SettingsController: UIViewController {
     }
     
     @objc private func didTapEdit() {
-        
+        let vc = UIHostingController(rootView: EditProfileView())
+        vc.insertBackgroundColor()
+        self.present(vc, animated: true)
     }
     
     private func configUI() {
