@@ -32,3 +32,16 @@
 "Suggested-Question-1"                = "Как стать финансово\nграмотным?";
 "Suggested-Question-2"                = "Мои расходы за\nпрошлый месяц";
 "Suggested-Question-3"                = "10 советов, как стать финансово\nграмотным";
+"Age didn't set"                      = "Возраст не задан";
+"Gender didn't set"                   = "Пол не указан";
+"Language" = "Язык";
+"+ Add new expense"                             = "+ Добавить новый расход";
+"Oops! No expenses yet. Let’s create one!"      = "Упс! Расходов ещё нет. Давайте создадим один!";
+"There's not enough data to show."              = "Недостаточно данных для отображения.";
+"Unnamed" = "Без названия";
+"currency.usd" = "Доллар США";
+"currency.eur" = "Евро";
+"currency.tg"  = "Казахстанский тенге";
+"currency.rub" = "Российский рубль";
+"Reminder"                                 = "Напоминание";
+"Do not forget to track your spendings today!" = "Не забудьте учесть свои расходы сегодня!";

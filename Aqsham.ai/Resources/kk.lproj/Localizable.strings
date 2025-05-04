@@ -32,3 +32,16 @@
 "Suggested-Question-1"                = "Қаржылық сауатты\nқалай болуға болады?";
 "Suggested-Question-2"                = "Менің шығындарым\nөткен айда";
 "Suggested-Question-3"                = "10 кеңес\nқаржылық сауатты болу үшін";
+"Age didn't set"                      = "Жасы орнатылмаған";
+"Gender didn't set"                   = "Жынысы көрсетілмеген";
+"Language" = "Тіл";
+"+ Add new expense"                             = "+ Жаңа шығын қосу";
+"Oops! No expenses yet. Let’s create one!"      = "Ой! Әзірге шығындар жоқ. Біреуін қосайық!";
+"There's not enough data to show."              = "Көрсету үшін жеткілікті деректер жоқ.";
+"Unnamed" = "Атаусыз";
+"currency.usd" = "АҚШ доллары";
+"currency.eur" = "Еуро";
+"currency.tg"  = "Қазақстан теңгесі";
+"currency.rub" = "Ресей рублі";
+"Reminder"                                 = "Еске салғыш";
+"Do not forget to track your spendings today!" = "Бүгінгі шығындарыңызды жазуды ұмытпаңыз!";

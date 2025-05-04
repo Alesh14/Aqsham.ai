@@ -22,7 +22,7 @@ struct AnalyticsView: View {
         VStack(spacing: 0) {
             if viewModel.expenses.isEmpty {
                 VStack (alignment: .leading, spacing: 0) {
-                    Text("Oops! No expenses yet. Let’s create one!")
+                    Text(AppLocalizedString("Oops! No expenses yet. Let’s create one!"))
                         .font(.system(size: 13, weight: .regular))
                         .foregroundColor(Color(hex: "#939393"))
                         .kerning(-0.08)
@@ -33,7 +33,7 @@ struct AnalyticsView: View {
                     Button {
                         onTapAddExpense?()
                     } label: {
-                        Text("+ Add new expense")
+                        Text(AppLocalizedString("+ Add new expense"))
                             .font(.system(size: 17, weight: .regular))
                             .foregroundColor(Color(UIColor.systemBlue))
                             .frame(alignment: .leading)

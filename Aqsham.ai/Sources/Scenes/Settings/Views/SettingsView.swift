@@ -108,7 +108,7 @@ struct SettingsSectionsView: View {
                         .contentShape(Rectangle())
                     
                     if section == .currency {
-                        Text(preferences.currency.rawValue)
+                        Text(preferences.currency.title)
                             .foregroundColor(Color(uiColor: .systemGray))
                     }
                     if section == .language {
@@ -116,9 +116,14 @@ struct SettingsSectionsView: View {
                             .foregroundColor(Color(uiColor: .systemGray))
                     }
                     
-                    Image(systemName: "chevron.right")
-                        .font(.system(size: 17))
-                        .foregroundColor(Color(hex: "#3C3C43").opacity(0.3))
+                    if section == .notifications {
+                        Text(preferences.notificationEnabled ? "On" : "Off")
+                            .foregroundColor(Color(uiColor: .systemGray))
+                    } else {
+                        Image(systemName: "chevron.right")
+                            .font(.system(size: 17))
+                            .foregroundColor(Color(hex: "#3C3C43").opacity(0.3))
+                    }
                 }
                 .contentShape(Rectangle())
                 .padding(.horizontal, 16)
@@ -135,18 +140,22 @@ struct ProfileView: View {
     
     @ObservedObject private var preferences = Preferences.shared
     
-    var ageText: String {
+    private var ageText: String {
         if let age = preferences.age {
             return "\(age)"
         }
-        return "Age didn't set"
+        return AppLocalizedString("Age didn't set")
     }
     
-    var genderText: String {
+    private var genderText: String {
         if let gender = preferences.gender {
             return gender.rawValue
         }
-        return "Gender didn't set"
+        return AppLocalizedString("Gender didn't set")
+    }
+    
+    private var userName: String {
+        preferences.userName ?? AppLocalizedString("Unnamed")
     }
     
     var body: some View {
@@ -157,12 +166,12 @@ struct ProfileView: View {
                     .foregroundColor(.white)
                     .shadow(radius: 1)
                 
-                Text(preferences.userName.prefix(2).uppercased())
+                Text(userName.prefix(2).uppercased())
                     .font(.system(size: 22, weight: .semibold))
                     .foregroundColor(Color(uiColor: .systemGray))
             }
             
-            Text(preferences.userName)
+            Text(userName)
                 .font(.system(size: 16, weight: .semibold))
                 .foregroundColor(.black)
             

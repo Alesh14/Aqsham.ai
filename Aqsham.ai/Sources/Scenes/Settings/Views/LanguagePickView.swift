@@ -40,7 +40,7 @@ struct LanguagePickView: View {
             }
             .padding(.top, -25)
             .listStyle(.insetGrouped)
-            .navigationTitle("Language")
+            .navigationTitle(AppLocalizedString("Language"))
             .navigationBarTitleDisplayMode(.inline)
         }
     }

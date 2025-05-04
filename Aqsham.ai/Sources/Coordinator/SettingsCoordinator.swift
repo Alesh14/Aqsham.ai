@@ -26,16 +26,29 @@ extension SettingsCoordinator: SettingsScreenRoute {
         switch route {
         case .editCategories:
             break
+            
         case .currency:
-            break
-        case .language: 
+            let vc = UIHostingController(rootView: CurrencyPickView())
+            vc.insertBackgroundColor()
+            navigationController.present(vc, animated: true)
+            
+        case .language:
             let vc = UIHostingController(rootView: LanguagePickView())
             vc.insertBackgroundColor()
             navigationController.present(vc, animated: true)
+            
         case .notifications:
-            break
+            Preferences.shared.notificationEnabled.toggle()
+            
         case .help:
-            break
+            guard let url = URL(string: "https://t.me/aleshnasx") else {
+                return
+            }
+
+            let application = UIApplication.shared
+            if application.canOpenURL(url) {
+                application.open(url, options: [:])
+            }
         }
     }
 }

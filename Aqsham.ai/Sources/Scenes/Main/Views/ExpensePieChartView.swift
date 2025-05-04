@@ -21,7 +21,7 @@ struct ExpensePieChartView: View {
     var body: some View {
         if viewModel.data.isEmpty {
             HStack {
-                Text("There's not enough data to show.")
+                Text(AppLocalizedString("There's not enough data to show."))
                     .font(.system(size: 13, weight: .regular))
                     .foregroundColor(Color(hex: "#939393"))
                     .kerning(-0.08)
