@@ -16,7 +16,6 @@ struct ExpenseDetailsView: View {
     
     init(item: ExpenseItem) {
         self.item = item
-        // initialize your @State
         _expenses = State(initialValue: item.expenses)
     }
     
