@@ -10,6 +10,9 @@ protocol ExpenseStorageService {
     @discardableResult
     func addExpense(amount: Double, date: Date, categoryId: UUID, comment: String?) -> Bool
     
+    @discardableResult
+    func removeExpense(expenseId: UUID) -> Bool
+    
     func fetchExpenses(from startDate: Date, to endDate: Date) -> [Expense]
 }
 
@@ -72,5 +75,19 @@ final class ExpenseStorageServiceImpl: ExpenseStorageService {
             return false
         }
         return true
+    }
+    
+    @discardableResult
+    func removeExpense(expenseId: UUID) -> Bool {
+        do {
+            try provider.dataStack.perform { transaction in
+                _ = try transaction.deleteAll(
+                    From<Expense>().where(\.id == expenseId)
+                )
+            }
+            return true
+        } catch {
+            return false
+        }
     }
 }

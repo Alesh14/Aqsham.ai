@@ -1,21 +1,37 @@
 import SwiftUI
 
+final class ExpenseDetailsViewModel {
+    
+    @LazyInjected(Container.expenseStorageService) private var service
+    
+    func remove(expense: Expense) {
+        service.removeExpense(expenseId: expense.id!)
+    }
+}
+
 struct ExpenseDetailsView: View {
     
     private enum Layout {
         static let secondaryColor: Color = .init(hex: "#3C3C43").opacity(0.6)
     }
     
-    var item: ExpenseItem
+    private var item: ExpenseItem
     
     @State private var expenses: [Expense]
     
-    var totalAmount: Double {
+    private let viewModel = ExpenseDetailsViewModel()
+    
+    private var totalAmount: Double {
         expenses.reduce(0) { $0 + $1.amount }
     }
     
-    init(item: ExpenseItem) {
+    private var onDismiss: (() -> Void)
+    
+    init(
+        item: ExpenseItem, onDismiss: @escaping (() -> Void)
+    ) {
         self.item = item
+        self.onDismiss = onDismiss
         _expenses = State(initialValue: item.expenses)
     }
     
@@ -125,7 +141,11 @@ struct ExpenseDetailsView: View {
                                     } onDelete: {
                                         withAnimation {
                                             expenses.removeAll { (storedExpense: Expense) in
-                                                expense == storedExpense
+                                                if expense == storedExpense {
+                                                    viewModel.remove(expense: expense)
+                                                    return true
+                                                }
+                                                return false
                                             }
                                         }
                                     }
@@ -139,6 +159,9 @@ struct ExpenseDetailsView: View {
             .navigationTitle(item.categoryName)
             .navigationBarTitleDisplayMode(.inline)
             .insertBackgroundColor()
+            .onDisappear {
+                onDismiss()
+            }
         }
     }
 }

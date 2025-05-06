@@ -53,7 +53,10 @@ final class MainController: UIViewController {
             onTapTalkToAgent: didTapTalkToAgent,
             onTapHistory: didTapHistory,
             onTapOpenExpenseDetails: ({ [weak self] expenseItem in
-                self?.viewModel.navigate(to: .expenseDetail(expenseItem))
+                self?.viewModel.navigate(to: .expenseDetail(expenseItem, { [weak self] in
+                    guard let self else { return }
+                    self.viewModel.onAppearSubject.send()
+                }))
             }),
             onAppearPublisher: viewModel.onAppearPublisher
         )

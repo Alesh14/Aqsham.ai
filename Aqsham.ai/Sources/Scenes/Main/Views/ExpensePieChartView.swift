@@ -33,6 +33,9 @@ struct ExpensePieChartView: View {
             }
             .background(Layout.backgroundColor)
             .cornerRadius(Layout.cornerRadius)
+            .onReceive(onAppearPublisher ?? Empty().eraseToAnyPublisher(), perform: { _ in
+                viewModel.fetchExpenses()
+            })
         } else {
             Chart(viewModel.data, id: \.categoryName) { item in
                 SectorMark(

@@ -50,3 +50,4 @@ playground.xcworkspace
 *.mobileprovision
 *.provisionprofile
 UserInterfaceState.xcuserstate
+Secrets.xcconfig
