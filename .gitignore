@@ -51,3 +51,4 @@ playground.xcworkspace
 *.provisionprofile
 UserInterfaceState.xcuserstate
 Secrets.xcconfig
+/Aqsham.ai.xcodeproj/xcshareddata/xcschemes/Aqsham.ai.xcscheme
