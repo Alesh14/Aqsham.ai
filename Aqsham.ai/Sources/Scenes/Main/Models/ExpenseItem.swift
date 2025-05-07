@@ -1,3 +1,4 @@
+import SwiftUI
 import Foundation
 
 struct ExpenseItem: Identifiable, Equatable {
@@ -6,4 +7,5 @@ struct ExpenseItem: Identifiable, Equatable {
     let categoryName: String
     let totalAmount: Double
     var expenses: [Expense]
+    var categoryColor: Color?
 }

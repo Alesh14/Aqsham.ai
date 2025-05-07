@@ -3,6 +3,7 @@ import SwiftUI
 
 enum MainScreenSection {
     case chat
+    case history
     case addExpense((() -> ()))
     case expenseDetail(ExpenseItem, (() -> ()))
 }
@@ -34,6 +35,12 @@ extension MainCoordinator: MainScreenRoute {
         switch route {
         case .chat:
             let vc = UIHostingController(rootView: ChatView())
+            vc.view.backgroundColor = .white
+            vc.hidesBottomBarWhenPushed = true
+            navigationController.pushViewController(vc, animated: true)
+            
+        case .history:
+            let vc = UIHostingController(rootView: HistoryView())
             vc.view.backgroundColor = .white
             vc.hidesBottomBarWhenPushed = true
             navigationController.pushViewController(vc, animated: true)

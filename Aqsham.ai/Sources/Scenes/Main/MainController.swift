@@ -28,7 +28,9 @@ final class MainController: UIViewController {
         titleLabel.text = AppLocalizedString("My Expenses")
     }
     
-    private func didTapHistory() {}
+    private func didTapHistory() {
+        viewModel.navigate(to: .history)
+    }
     
     private func didTapAddExpense() {
         viewModel.navigate(to: .addExpense({ [weak self] in

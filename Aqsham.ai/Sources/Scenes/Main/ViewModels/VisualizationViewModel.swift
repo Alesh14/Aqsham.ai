@@ -1,7 +1,8 @@
+import SwiftUI
 import Combine
 import Foundation
 
-final class ExpensePieChartViewModel: ObservableObject {
+final class VisualizationViewModel: ObservableObject {
     
     @Injected(Container.expenseStorageService) private var expenseStorageService
     
@@ -31,7 +32,7 @@ final class ExpensePieChartViewModel: ObservableObject {
         self.data = categoryAmountDict.compactMap { category, amount in
             let name = category.name!
             let icon = category.icon!
-            return ExpenseItem(iconSystemName: icon, categoryName: name, totalAmount: amount, expenses: [])
+            return ExpenseItem(iconSystemName: icon, categoryName: name, totalAmount: amount, expenses: [], categoryColor: Color(hex: category.hex!))
         }
         .sorted(by: { $0.totalAmount > $1.totalAmount })
     }
