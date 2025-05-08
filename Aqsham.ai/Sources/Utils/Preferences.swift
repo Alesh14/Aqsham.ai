@@ -110,9 +110,8 @@ final class Preferences: ObservableObject {
         }
     }
     
-    var pinCode: String? {
-        get { UserDefaults.standard.string(forKey: Keys.pincode) }
-        set { UserDefaults.standard.set(newValue, forKey: Keys.pincode) }
+    @Published var pinCode: String? {
+        didSet { UserDefaults.standard.set(pinCode, forKey: Keys.pincode) }
     }
     
     private init() {
@@ -145,6 +144,10 @@ final class Preferences: ObservableObject {
             self.notificationEnabled = bool
         } else {
             self.notificationEnabled = true
+        }
+        
+        if let pin = UserDefaults.standard.string(forKey: Keys.pincode) {
+            self.pinCode = pin
         }
     }
 }

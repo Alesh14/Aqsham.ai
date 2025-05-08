@@ -128,6 +128,11 @@ struct SettingsSectionsView: View {
                             .foregroundColor(Color(uiColor: .systemGray))
                     }
                     
+                    if section == .pinCode {
+                        Text(preferences.pinCode == nil ? "Didn't set yet" : "Set")
+                            .foregroundColor(Color(uiColor: .systemGray))
+                    }
+                    
                     if section == .notifications {
                         Text(preferences.notificationEnabled ? AppLocalizedString("On") : AppLocalizedString("Off"))
                             .foregroundColor(Color(uiColor: .systemGray))

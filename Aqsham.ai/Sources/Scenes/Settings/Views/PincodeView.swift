@@ -75,11 +75,19 @@ struct PincodeView: View {
                     resetAll()
                 }
             }
+            .toolbar(content: {
+                ToolbarItem (placement: .topBarTrailing) {
+                    Button("Remove PIN code") {
+                        preferences.pinCode = nil
+                        presentationMode.wrappedValue.dismiss()
+                    }
+                    .disabled(mode == .verify || preferences.pinCode == nil)
+                }
+            })
             .onAppear {
                 isTextFieldFocused = true
             }
         }
-        .preferredColorScheme(.light) 
     }
 
     // MARK: - Computed
