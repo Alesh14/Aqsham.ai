@@ -3,19 +3,15 @@ import SwiftUI
 import Combine
 
 enum ChartType: String, CaseIterable, Identifiable {
-    case pie   = "Pie Chart"
     case bar   = "Bar Chart"
+    case pie   = "Pie Chart"
     case line  = "Line Chart"
     var id: String { rawValue }
 }
 
 struct ChartPicker: View {
     
-    @State var selected: ChartType {
-        didSet {
-            onChange(selected)
-        }
-    }
+    @State var selected: ChartType
     
     var onChange: ((ChartType) -> Void)
 
@@ -29,6 +25,9 @@ struct ChartPicker: View {
         .accentColor(.gray)
         .font(.system(size: 17))
         .padding(.horizontal)
+        .onChange(of: selected) { oldValue, newValue in
+            onChange(newValue)
+        }
     }
 
     private var pickerLabel: some View {
@@ -40,6 +39,7 @@ struct ChartPicker: View {
 }
 
 struct VisualizationView: View {
+    
     private enum Layout {
         static let backgroundColor: Color = .white
         static let cornerRadius: CGFloat = 12
@@ -90,35 +90,48 @@ struct VisualizationView: View {
             }
             .padding(.top, 10)
 
-            switch selectedChartType {
-            case .pie:
-                PieChart(data: viewModel.data)
-                    .padding(20)
-            case .bar:
-                BarChart(data: viewModel.data)
-                    .padding(20)
-            case .line:
-                LineChart(data: viewModel.data)
-                    .padding(20)
+            Group {
+                switch selectedChartType {
+                case .pie:
+                    PieChart(data: viewModel.data)
+                case .bar:
+                    BarChart(data: viewModel.data)
+                case .line:
+                    LineChart(data: viewModel.data)
+                }
             }
+            .padding(.vertical, 10)
+            .padding(.horizontal, 20)
+            .padding(.bottom, 5)
         }
     }
 }
 
-// MARK: – Chart Variants
 
 struct PieChart: View {
     
     let data: [ExpenseItem]
-    
+
     var body: some View {
         Chart(data, id: \.categoryName) { item in
             SectorMark(
-                angle: .value("Amount", item.totalAmount),
+                angle: .value(AppLocalizedString("Amount"), item.totalAmount),
                 innerRadius: .ratio(0.5),
                 angularInset: 1
             )
-            .foregroundStyle(by: .value("Category", item.categoryName))
+            .foregroundStyle(by: .value(AppLocalizedString("Category"), item.categoryName))
+            
+            .annotation(position: .overlay, alignment: .center) {
+                VStack(spacing: 2) {
+                    Text(item.categoryName)
+                        .font(.caption2)
+                        .foregroundColor(.white)
+                    Text(item.totalAmount, format: .currency(code: Preferences.shared.currency.code))
+                        .font(.caption2)
+                        .foregroundColor(.white)
+                }
+                .multilineTextAlignment(.center)
+            }
         }
         .chartLegend(position: .trailing, alignment: .center, spacing: 16)
         .frame(height: 250)
@@ -126,30 +139,76 @@ struct PieChart: View {
 }
 
 struct BarChart: View {
+
     let data: [ExpenseItem]
+
+    private var average: Double {
+        guard !data.isEmpty else { return 0 }
+        return data.map(\.totalAmount).reduce(0, +) / Double(data.count)
+    }
+
     var body: some View {
-        Chart(data, id: \.categoryName) { item in
-            BarMark(
-                x: .value("Category", item.categoryName),
-                y: .value("Amount", item.totalAmount)
-            )
-            .foregroundStyle(by: .value("Category", item.categoryName))
+        Chart {
+            ForEach(data, id: \.categoryName) { item in
+                BarMark(
+                    x: .value(AppLocalizedString("Category"), item.categoryName),
+                    y: .value(AppLocalizedString("Amount"), item.totalAmount)
+                )
+                .foregroundStyle(by: .value(AppLocalizedString("Category"), item.categoryName))
+                
+                .annotation(position: .top) {
+                    Text(item.totalAmount, format: .currency(code: Preferences.shared.currency.code))
+                        .font(.caption2)
+                }
+            }
         }
-        .chartYAxisLabel("Amount")
+        .chartYAxisLabel(AppLocalizedString("Amount"))
         .frame(height: 250)
     }
 }
 
 struct LineChart: View {
+    
     let data: [ExpenseItem]
+
     var body: some View {
-        Chart(data) { item in
-            LineMark(
-                x: .value("Category", item.categoryName),
-                y: .value("Amount", item.totalAmount)
-            )
-            .foregroundStyle(by: .value("Category", item.categoryName))
+        Chart {
+            ForEach(data, id: \.categoryName) { item in
+                LineMark(
+                    x: .value(AppLocalizedString("Category"), item.categoryName),
+                    y: .value(AppLocalizedString("Amount"), item.totalAmount)
+                )
+                .interpolationMethod(.catmullRom)
+                .foregroundStyle(by: .value(AppLocalizedString("Category"), item.categoryName))
+
+                PointMark(
+                    x: .value(AppLocalizedString("Category"), item.categoryName),
+                    y: .value(AppLocalizedString("Amount"), item.totalAmount)
+                )
+                .symbolSize(40)
+                .foregroundStyle(by: .value(AppLocalizedString("Category"), item.categoryName))
+                .annotation(position: .top) {
+                    Text(item.totalAmount, format: .currency(code: Preferences.shared.currency.code))
+                        .font(.caption2)
+                }
+            }
         }
+        .chartXAxis {
+            AxisMarks(values: .automatic) { _ in
+                AxisGridLine()
+                AxisTick()
+                AxisValueLabel()
+            }
+        }
+        .chartYAxis {
+            AxisMarks(values: .automatic) { _ in
+                AxisGridLine()
+                AxisTick()
+                AxisValueLabel()
+            }
+        }
+        .chartXAxisLabel(AppLocalizedString("Category"))
+        .chartYAxisLabel(AppLocalizedString("Amount"))
         .frame(height: 250)
     }
 }
