@@ -27,6 +27,7 @@ final class AddExpenseCoordinator: SubCoordinator {
     func start(in parentCoordinator: any Coordinator, present: Bool, onCompletion: (() -> Void)? = nil) {
         let vm = AddExpenseViewModel(router: self)
         let vc = UIHostingController(rootView: AddExpenseView(viewModel: vm))
+        vc.overrideUserInterfaceStyle = .light
         vc.insertBackgroundColor()
         navigationController.setViewControllers([vc], animated: false)
         self.onCompletion = onCompletion
@@ -51,11 +52,13 @@ extension AddExpenseCoordinator: AddExpenseScreenRoute {
             let vm = CategoryViewModel(router: self)
             vm.selectedCategory = initialCategory
             let vc = UIHostingController(rootView: CategoryView(viewModel: vm, onCategorySelected: closure))
+            vc.overrideUserInterfaceStyle = .light
             vc.insertBackgroundColor()
             navigationController.pushViewController(vc, animated: true)
             
         case .addCategory:
             let vc = UIHostingController(rootView: AddNewCategoryView(viewModel: .init(router: self)))
+            vc.overrideUserInterfaceStyle = .light
             vc.insertBackgroundColor()
             navigationController.pushViewController(vc, animated: true)
             

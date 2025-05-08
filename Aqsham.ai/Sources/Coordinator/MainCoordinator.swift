@@ -37,10 +37,12 @@ extension MainCoordinator: MainScreenRoute {
             let vc = UIHostingController(rootView: ChatView())
             vc.view.backgroundColor = .white
             vc.hidesBottomBarWhenPushed = true
+            vc.overrideUserInterfaceStyle = .light
             navigationController.pushViewController(vc, animated: true)
             
         case .history:
             let vc = UIHostingController(rootView: HistoryView())
+            vc.overrideUserInterfaceStyle = .light
             vc.view.backgroundColor = .white
             vc.hidesBottomBarWhenPushed = true
             navigationController.pushViewController(vc, animated: true)
@@ -50,6 +52,7 @@ extension MainCoordinator: MainScreenRoute {
             
         case .expenseDetail(let item, let completion):
             let vc = UIHostingController(rootView: ExpenseDetailsView(item: item, onDismiss: completion))
+            vc.overrideUserInterfaceStyle = .light
             vc.modalPresentationStyle = .formSheet
             navigationController.present(vc, animated: true)
         }

@@ -17,6 +17,7 @@ final class ChatController: UIViewController {
         self.insertBackgroundColor()
         
         let vc = UIHostingController(rootView: ChatView())
+        vc.overrideUserInterfaceStyle = .light
         vc.view.backgroundColor = .clear
         self.addChild(vc)
         self.view.addSubview(vc.view)

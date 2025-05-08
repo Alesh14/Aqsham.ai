@@ -29,11 +29,13 @@ extension SettingsCoordinator: SettingsScreenRoute {
             
         case .currency:
             let vc = UIHostingController(rootView: CurrencyPickView())
+            vc.overrideUserInterfaceStyle = .light
             vc.insertBackgroundColor()
             navigationController.present(vc, animated: true)
             
         case .language:
             let vc = UIHostingController(rootView: LanguagePickView())
+            vc.overrideUserInterfaceStyle = .light
             vc.insertBackgroundColor()
             navigationController.present(vc, animated: true)
             
@@ -43,6 +45,7 @@ extension SettingsCoordinator: SettingsScreenRoute {
         case .pinCode:
             let vc = UIHostingController(rootView: PincodeView())
             vc.insertBackgroundColor()
+            vc.overrideUserInterfaceStyle = .light
             navigationController.present(vc, animated: true)
             
         case .help:

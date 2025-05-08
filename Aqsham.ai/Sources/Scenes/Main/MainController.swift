@@ -64,6 +64,7 @@ final class MainController: UIViewController {
         )
         let vc = UIHostingController(rootView: hostView)
         vc.view.backgroundColor = .clear
+        vc.overrideUserInterfaceStyle = .light
         self.addChild(vc)
         self.view.addSubview(vc.view)
         vc.didMove(toParent: self)

@@ -27,6 +27,9 @@ final class AppCoordinator: Coordinator {
         let coordinator2 = subCoordinators[1]
         coordinator2.start()
         
+        coordinator1.navigationController.overrideUserInterfaceStyle = .light
+        coordinator2.navigationController.overrideUserInterfaceStyle = .light
+        
         coordinator1.navigationController.tabBarItem = UITabBarItem(
             title: AppLocalizedString("Home"),
             image: UIImage(systemName: "house.fill"),
@@ -44,9 +47,17 @@ final class AppCoordinator: Coordinator {
         ]
         navigationController.pushViewController(controller, animated: false)
         
-        let pinCodeVC = UIHostingController(rootView: AskPinCodeView())
-        
-        navigationController.present(pinCodeVC, animated: false)
+        if Preferences.shared.pinCode != nil {
+            controller.view.isUserInteractionEnabled = false
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.95) {
+                let pinCodeVC = UIHostingController(rootView: AskPinCodeView())
+                pinCodeVC.modalPresentationStyle = .fullScreen
+                pinCodeVC.modalTransitionStyle = .coverVertical
+                pinCodeVC.overrideUserInterfaceStyle = .light
+                controller.present(pinCodeVC, animated: true)
+                controller.view.isUserInteractionEnabled = true
+            }
+        }
     }
     
     func configEvents() {

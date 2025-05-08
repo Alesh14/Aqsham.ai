@@ -38,6 +38,7 @@ final class SettingsController: UIViewController {
     
     @objc private func didTapEdit() {
         let vc = UIHostingController(rootView: EditProfileView())
+        vc.overrideUserInterfaceStyle = .light
         vc.insertBackgroundColor()
         self.present(vc, animated: true)
     }
@@ -46,7 +47,7 @@ final class SettingsController: UIViewController {
         let vc = UIHostingController(rootView: SettingsView(onTap: { [weak self] section in
             self?.viewModel.navigate(to: section)
         }))
-        
+        vc.overrideUserInterfaceStyle = .light
         vc.insertBackgroundColor()
         addChild(vc)
         vc.didMove(toParent: self)
