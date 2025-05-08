@@ -40,6 +40,11 @@ extension SettingsCoordinator: SettingsScreenRoute {
         case .notifications:
             Preferences.shared.notificationEnabled.toggle()
             
+        case .pinCode:
+            let vc = UIHostingController(rootView: PincodeView())
+            vc.insertBackgroundColor()
+            navigationController.present(vc, animated: true)
+            
         case .help:
             guard let url = URL(string: "https://t.me/aleshnasx") else {
                 return

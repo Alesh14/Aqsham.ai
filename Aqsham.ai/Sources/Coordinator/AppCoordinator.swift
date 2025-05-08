@@ -1,4 +1,5 @@
 import UIKit
+import SwiftUI
 import Combine
 
 final class AppCoordinator: Coordinator {
@@ -42,6 +43,10 @@ final class AppCoordinator: Coordinator {
             coordinator1.navigationController, coordinator2.navigationController
         ]
         navigationController.pushViewController(controller, animated: false)
+        
+        let pinCodeVC = UIHostingController(rootView: AskPinCodeView())
+        
+        navigationController.present(pinCodeVC, animated: false)
     }
     
     func configEvents() {

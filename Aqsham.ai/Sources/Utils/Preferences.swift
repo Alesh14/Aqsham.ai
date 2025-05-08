@@ -69,6 +69,7 @@ final class Preferences: ObservableObject {
         static let gender = "gender"
         static let age = "age"
         static let notificationEnabled = "notificationEnabled"
+        static let pincode = "pincode"
     }
     
     static let shared = Preferences()
@@ -107,6 +108,11 @@ final class Preferences: ObservableObject {
                 NotificationScheduler.shared.cancel(identifier: AppConstants.notificationIdentifier)
             }
         }
+    }
+    
+    var pinCode: String? {
+        get { UserDefaults.standard.string(forKey: Keys.pincode) }
+        set { UserDefaults.standard.set(newValue, forKey: Keys.pincode) }
     }
     
     private init() {

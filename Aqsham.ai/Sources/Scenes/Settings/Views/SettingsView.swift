@@ -24,35 +24,39 @@ struct SettingsSectionsView: View {
         case notifications
         case currency
         case language
+        case pinCode
         case help
         
         var title: String {
             switch self {
             case .editCategories: return AppLocalizedString("Edit Categories")
-            case .notifications: return AppLocalizedString("Notifications")
-            case .currency: return AppLocalizedString("Currency")
-            case .language: return AppLocalizedString("Language")
-            case .help: return AppLocalizedString("Help")
+            case .notifications:  return AppLocalizedString("Notifications")
+            case .currency:       return AppLocalizedString("Currency")
+            case .language:       return AppLocalizedString("Language")
+            case .help:           return AppLocalizedString("Help")
+            case .pinCode:        return AppLocalizedString("Pin code")
             }
         }
         
         var iconName: String {
             switch self {
             case .editCategories: return "slider.horizontal.3"
-            case .notifications: return "speaker.wave.2.fill"
-            case .currency: return "bitcoinsign.circle"
-            case .language: return "globe"
-            case .help: return "questionmark.circle"
+            case .notifications:  return "speaker.wave.2.fill"
+            case .currency:       return "bitcoinsign.circle"
+            case .language:       return "globe"
+            case .help:           return "questionmark.circle"
+            case .pinCode:        return "lock"
             }
         }
         
         var bgColor: Color {
             switch self {
             case .editCategories: return .blue
-            case .notifications: return .red
-            case .currency: return .gray
-            case .language: return .purple
-            case .help: return .orange
+            case .notifications:  return .red
+            case .currency:       return .gray
+            case .language:       return .purple
+            case .help:           return .orange
+            case .pinCode:        return .green
             }
         }
     }
@@ -80,6 +84,10 @@ struct SettingsSectionsView: View {
                 button(for: .language) {
                     onTap(.language)
                 }
+                Divider()
+                button(for: .pinCode) {
+                    onTap(.pinCode)
+                }
             }
             .cornerRadius(16)
             
@@ -99,7 +107,11 @@ struct SettingsSectionsView: View {
                 HStack (spacing: 16) {
                     Image(systemName: section.iconName)
                         .frame(width: 20, height: 16)
-                        .foregroundColor(section.bgColor)
+                        .foregroundColor(.white)
+                        .padding(.horizontal, 4)
+                        .padding(.vertical, 6)
+                        .background(section.bgColor)
+                        .cornerRadius(4)
                     
                     Text(section.title)
                         .foregroundColor(section == .editCategories ? .blue : .black)
