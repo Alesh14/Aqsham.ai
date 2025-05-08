@@ -25,7 +25,10 @@ extension SettingsCoordinator: SettingsScreenRoute {
     func trigger(_ route: SettingsSectionsView.Section) {
         switch route {
         case .editCategories:
-            break
+            let vc = UIHostingController(rootView: EditCategoryView())
+            vc.overrideUserInterfaceStyle = .light
+            vc.insertBackgroundColor()
+            navigationController.present(vc, animated: true)
             
         case .currency:
             let vc = UIHostingController(rootView: CurrencyPickView())

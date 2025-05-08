@@ -135,9 +135,8 @@ struct ExpenseDetailsView: View {
                                             .padding(.horizontal, 14)
                                             .padding(.vertical, 12)
                                         }
-                                        .background(Color.white)
-                                        .cornerRadius(12.0)
                                         .padding(.horizontal, 16)
+                                        .background(Color.white)
                                     } onDelete: {
                                         withAnimation {
                                             expenses.removeAll { (storedExpense: Expense) in
@@ -149,6 +148,7 @@ struct ExpenseDetailsView: View {
                                             }
                                         }
                                     }
+                                    .padding(.horizontal)
                                 }
                             }
                             .padding(.vertical)
@@ -175,15 +175,18 @@ extension Date {
     }
 }
 
-private struct SwipeToDeleteRow<Content: View>: View {
+struct SwipeToDeleteRow<Content: View>: View {
+    
+    var cornerRadius: CGFloat
     let content: Content
     let onDelete: () -> Void
 
     @State private var offsetX: CGFloat = 0
     private let deleteThreshold: CGFloat = -80
 
-    init(@ViewBuilder content: () -> Content, onDelete: @escaping () -> Void) {
+    init(cornerRadius: CGFloat = 12, @ViewBuilder content: () -> Content, onDelete: @escaping () -> Void) {
         self.content = content()
+        self.cornerRadius = cornerRadius
         self.onDelete = onDelete
     }
 
@@ -198,7 +201,6 @@ private struct SwipeToDeleteRow<Content: View>: View {
             }
             
             content
-                .background(Color(.systemBackground))
                 .offset(x: offsetX)
                 .gesture(
                     DragGesture()
@@ -220,7 +222,6 @@ private struct SwipeToDeleteRow<Content: View>: View {
                         }
                 )
         }
-        .cornerRadius(12)
-        .padding(.horizontal)
+        .cornerRadius(cornerRadius)
     }
 }
