@@ -39,7 +39,7 @@ struct EditCategoryView: View {
         if viewModel.categories.isEmpty {
             NavigationView {
                 VStack {
-                    Text("You have no any category!")
+                    Text(AppLocalizedString("You have no any category!"))
                         .font(.system(size: 13, weight: .regular))
                         .foregroundColor(Color(hex: "#939393"))
                         .kerning(-0.08)
@@ -53,7 +53,7 @@ struct EditCategoryView: View {
                     Spacer()
                 }
                 .frame(maxWidth: .infinity)
-                .navigationTitle("Edit Categories")
+                .navigationTitle(AppLocalizedString("Edit Categories"))
                 .navigationBarTitleDisplayMode(.inline)
             }
         } else {
@@ -92,7 +92,7 @@ struct EditCategoryView: View {
                     Spacer()
                 }
                 .padding(.horizontal, 22)
-                .navigationTitle("Edit Categories")
+                .navigationTitle(AppLocalizedString("Edit Categories"))
                 .navigationBarTitleDisplayMode(.inline)
                 .insertBackgroundColor()
             }

@@ -70,14 +70,14 @@ struct PincodeView: View {
             .padding()
             .navigationTitle(titleText)
             .navigationBarTitleDisplayMode(.inline)
-            .alert("PINs do not match", isPresented: $showMismatchAlert) {
+            .alert(AppLocalizedString("PINs do not match"), isPresented: $showMismatchAlert) {
                 Button("OK") {
                     resetAll()
                 }
             }
             .toolbar(content: {
                 ToolbarItem (placement: .topBarTrailing) {
-                    Button("Remove PIN code") {
+                    Button(AppLocalizedString("Remove PIN code")) {
                         preferences.pinCode = nil
                         presentationMode.wrappedValue.dismiss()
                     }
@@ -92,22 +92,22 @@ struct PincodeView: View {
 
     // MARK: - Computed
 
-    private var titleText: LocalizedStringKey {
+    private var titleText: String {
         switch mode {
-        case .verify:      return "Enter PIN code"
-        case .setupFirst:  return "Set PIN code"
-        case .setupRepeat: return "Repeat PIN code"
+        case .verify:      return AppLocalizedString("Enter PIN code")
+        case .setupFirst:  return AppLocalizedString("Set PIN code")
+        case .setupRepeat: return AppLocalizedString("Repeat PIN code")
         }
     }
 
-    private var promptText: LocalizedStringKey {
+    private var promptText: String {
         switch mode {
         case .verify:
-            return "Enter current PIN code"
+            return AppLocalizedString("Enter current PIN code")
         case .setupFirst:
-            return "Enter NEW PIN code"
+            return AppLocalizedString("Enter NEW PIN code")
         case .setupRepeat:
-            return "Repeat PIN code"
+            return AppLocalizedString("Repeat PIN code")
         }
     }
 

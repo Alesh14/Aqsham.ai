@@ -129,7 +129,7 @@ struct SettingsSectionsView: View {
                     }
                     
                     if section == .pinCode {
-                        Text(preferences.pinCode == nil ? "Didn't set yet" : "Set")
+                        Text(preferences.pinCode == nil ? AppLocalizedString("Didn't set yet") : AppLocalizedString("Already set"))
                             .foregroundColor(Color(uiColor: .systemGray))
                     }
                     
