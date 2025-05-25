@@ -28,12 +28,12 @@ final class CategoryStorageServiceImpl: CategoryStorageService {
         do {
             try provider.dataStack.perform { transaction in
                 _ = try transaction.deleteAll(
-                    From<Category>().where(\.id == id)
+                    From<Expense>().where(\.category?.id == id)
                 )
             }
             try provider.dataStack.perform { transaction in
                 _ = try transaction.deleteAll(
-                    From<Expense>().where(\.category?.id == id)
+                    From<Category>().where(\.id == id)
                 )
             }
             return true
